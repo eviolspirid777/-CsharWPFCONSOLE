@@ -8,7 +8,7 @@ namespace PrsnLib
 {
     public class PathContent
     {
-        public string Get_Path() => Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "content.json");
+        public string GetPath() => Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "content.json");
     }
 }
 

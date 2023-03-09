@@ -8,9 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PrsnLib\PrsnLib.csproj">
-      <Private>False</Private>
-    </ProjectReference>
+    <ProjectReference Include="..\PrsnLib\PrsnLib.csproj" />
   </ItemGroup>
 
 </Project>

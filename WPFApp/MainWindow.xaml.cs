@@ -39,7 +39,7 @@ namespace csSharpJWPF
         public void Button_click_List(object e, EventArgs args)
         {
             PathContent path = new PathContent();
-            FileInfo fileInf = new FileInfo(path.Get_Path());
+            FileInfo fileInf = new FileInfo(path.GetPath());
             LstMen.Opacity = LstMen.Opacity - 0.05;
             if (fileInf.Exists == true)
             {
@@ -49,7 +49,7 @@ namespace csSharpJWPF
             }
             else
             {
-                StreamWriter sw = File.CreateText(path.Get_Path());
+                StreamWriter sw = File.CreateText(path.GetPath());
                 Window1 window1 = new Window1();
                 this.Close();
                 window1.Show();

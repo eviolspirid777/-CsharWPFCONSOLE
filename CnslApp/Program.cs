@@ -165,7 +165,7 @@ internal class Program
             WriteIndented = true
         };
         string jsonString = JsonSerializer.Serialize(exmp, options);
-        File.WriteAllText(path.Get_Path(), jsonString);
+        File.WriteAllText(path.GetPath(), jsonString);
     }
 
     static void FillExmp(ref Person temper)
@@ -214,10 +214,10 @@ internal class Program
     static void ListMenu()
     {
         PathContent path = new PathContent();
-        FileInfo fileInf = new FileInfo(path.Get_Path());
+        FileInfo fileInf = new FileInfo(path.GetPath());
         if (fileInf.Exists)
         {
-            string jsonString = File.ReadAllText(path.Get_Path());
+            string jsonString = File.ReadAllText(path.GetPath());
             List<Person> exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!; //ПРЕДСТАВИТЬ ВВИДЕ МАССИВА И ОТРАБОТАТЬ КАЖДЫЙ ЭЛЕМЕНТ ЧЕРЕЗ ЦИКЛ
             int counter = ExmpMenu(exp);
             Console.WriteLine();
@@ -228,7 +228,7 @@ internal class Program
         else
         {
             Console.WriteLine("Не могу найти файл! Создаю новый...");
-            StreamWriter sw = File.CreateText(path.Get_Path());
+            StreamWriter sw = File.CreateText(path.GetPath());
             Thread.Sleep(1000);
             ListMenu();
         }
@@ -237,15 +237,15 @@ internal class Program
     static void AddNode()
     {
         PathContent path = new PathContent();
-        FileInfo fileInf = new FileInfo(path.Get_Path());
+        FileInfo fileInf = new FileInfo(path.GetPath());
         if (fileInf.Exists)
         {
             var humans = new List<Person>();
             string flag = "";
-            flag = File.ReadAllText(path.Get_Path()).Trim();
+            flag = File.ReadAllText(path.GetPath()).Trim();
             if (flag != "")
             {
-                humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(path.Get_Path()));
+                humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(path.GetPath()));
             }
             Person temp = new();
             FillExmp(ref temp);
@@ -257,7 +257,7 @@ internal class Program
                 WriteIndented = true
             };
             string jsonString = JsonSerializer.Serialize(humans, options);
-            File.WriteAllText(path.Get_Path(), jsonString);
+            File.WriteAllText(path.GetPath(), jsonString);
             Console.Clear();
             PrintMenu();
         }
@@ -268,7 +268,7 @@ internal class Program
     static void Sort()
     {
         PathContent path = new PathContent();
-        List<Person> human = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(path.Get_Path()));
+        List<Person> human = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(path.GetPath()));
         human.Sort((p1, p2) => p1.Fio.Name.CompareTo(p2.Fio.Name));
         ExmpMenu(human);
         Console.ReadKey();
@@ -278,7 +278,7 @@ internal class Program
     static void Filt()
     {
         PathContent path = new PathContent();
-        List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(path.Get_Path()));
+        List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(path.GetPath()));
         Console.WriteLine("Введите фамилию:");
         string surname = Console.ReadLine();
         Console.Clear();

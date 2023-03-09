@@ -35,7 +35,7 @@ namespace csSharpJWPF
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),       //настройки для сериалайзера
                 WriteIndented = true
             };
-            string jsonString = File.ReadAllText(way.Get_Path());
+            string jsonString = File.ReadAllText(way.GetPath());
             List<Person> humans = JsonSerializer.Deserialize<List<Person>>(jsonString);
             List<Person> tempHumans = new List<Person>();
             foreach (var e in humans)

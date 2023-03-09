@@ -13,3 +13,6 @@ F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\refint\CnslApp.dll
 F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\CnslApp.pdb
 F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\CnslApp.genruntimeconfig.cache
 F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\ref\CnslApp.dll
+F:\my_projects\CnslApp\CnslApp\bin\Debug\net7.0\PrsnLib.dll
+F:\my_projects\CnslApp\CnslApp\bin\Debug\net7.0\PrsnLib.pdb
+F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\CnslApp.csproj.CopyComplete

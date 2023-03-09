@@ -1,0 +1,16 @@
+﻿<Window x:Class="csSharpJWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:csSharpJWPF"
+        mc:Ignorable="d"
+        Title="Start desktop" Height="450" Width="525" Background="#A9A9A9" ResizeMode="CanMinimize">
+    <Grid ShowGridLines="False" HorizontalAlignment="Left" VerticalAlignment="Bottom" >
+        <DockPanel VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Button x:Name="LstMen" Height="30" Width="262.5"  Content="Список студентов" Background="#696969"  ToolTip="Выводит на экран список студентов" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Click="Button_click_List" HorizontalAlignment="Center" Canvas.Top="-30" VerticalAlignment="Top"/>
+            <Button x:Name ="Add" Height="30"  Width="262.5" Background="#696969" Content="Добавить Студента" ToolTip="Добавляет в список студента" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Click="Button_click_Add" Canvas.Left="-263" Canvas.Top="-30"/>
+        </DockPanel>
+        <Button x:Name="Exit" Content="Выход" Background="#696969" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" BorderBrush="#FFBBABAB" FontSize="18" Click="Exit_click" IsCancel="True" Width="0" Height="0"/>
+    </Grid>
+</Window>

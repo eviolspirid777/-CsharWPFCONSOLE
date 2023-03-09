@@ -1,0 +1,50 @@
+﻿<Window x:Class="csSharpJWPF.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:csSharpJWPF"
+        mc:Ignorable="d"
+        Title="Add Student" Height="880" Width="800" Background="#696969">
+    <Grid>
+        <StackPanel>
+            <GroupBox Header="Фамилия" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите фамилию студента">
+                <TextBox x:Name="Surname"  Height="30"/>
+            </GroupBox>
+            <GroupBox Header="Имя" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите имя студента">
+                <TextBox x:Name="Name"  Height="30"/>
+            </GroupBox>
+            <GroupBox Header="Отчество" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите отчество студента">
+                <TextBox x:Name="Patron"  Height="30"/>
+            </GroupBox>
+            <GroupBox Header="Факультет" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите факультет студента">
+                <TextBox x:Name="Faculty" Height="30"/>
+            </GroupBox>
+            <GroupBox Header="Специальность" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите специальность студента">
+                <TextBox x:Name="Specialty" Height="30"/>
+            </GroupBox>
+            <GroupBox Header="Курс" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите курс студента">
+                <TextBox x:Name="Course" Height="30"/>
+            </GroupBox>
+            <GroupBox Header="Группа" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите группу студента">
+                <TextBox x:Name="Group"  Height="30"/>
+            </GroupBox>
+            <GroupBox Header="Город" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите город студента">
+                <TextBox x:Name="City" Height="30"/>
+            </GroupBox>
+            <GroupBox Header="Почтовый индекс" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите почтовый индекс студента">
+                <TextBox x:Name="PstIndex"  Height="30"/>
+            </GroupBox>
+            <GroupBox Header="Улица" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите улицу студента">
+                <TextBox x:Name="Street"  Height="30"/>
+            </GroupBox>
+            <GroupBox Header="Телефон" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите телефон студента">
+                <TextBox x:Name="Phone"  Height="30"/>
+            </GroupBox>
+            <GroupBox Header="Почта" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите почту студента">
+                <TextBox x:Name="Mail"  Height="30"/>
+            </GroupBox>
+            <Button x:Name="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Добавить" Width="200" Height="60" Background="#C0C0C0" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#696969" Click="Key_Down" FlowDirection="RightToLeft" Padding="1,-1,1,1" Margin="0,2,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

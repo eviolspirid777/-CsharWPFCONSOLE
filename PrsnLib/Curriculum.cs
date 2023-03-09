@@ -1,9 +1,12 @@
 ﻿using System;
 
-public class Curriculum
+namespace PrsnLib
 {
-    public string? Faculty { get; set; } = "None";
-    public string? Specialty { get; set; } = "None";
-    public string? Course { get; set; } = "None";
-    public string? Group { get; set; } = "None";
+    public class Curriculum
+    {
+        public string? Faculty { get; set; } = "None";
+        public string? Specialty { get; set; } = "None";
+        public string? Course { get; set; } = "None";
+        public string? Group { get; set; } = "None";
+    }
 }

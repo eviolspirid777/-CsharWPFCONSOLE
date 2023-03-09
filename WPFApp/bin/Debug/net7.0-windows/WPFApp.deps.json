@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "WPFApp/1.0.0": {
+        "dependencies": {
+          "PrsnLib": "1.0.0"
+        },
+        "runtime": {
+          "WPFApp.dll": {}
+        }
+      },
+      "PrsnLib/1.0.0": {
+        "runtime": {
+          "PrsnLib.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WPFApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PrsnLib/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

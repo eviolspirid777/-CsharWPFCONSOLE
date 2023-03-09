@@ -1,0 +1,68 @@
+[
+  {
+    "Fio": {
+      "Surname": "Мисюрин",
+      "Name": "Кирилл",
+      "Patron": "Владимирович"
+    },
+    "Curriculum": {
+      "Faculty": "Мкн",
+      "Specialty": "укаука",
+      "Course": "4",
+      "Group": "мкн-б-0-20-1"
+    },
+    "Address": {
+      "City": "Ставрополь",
+      "PstIndex": "355042",
+      "Street": "Доваторцев"
+    },
+    "Contacts": {
+      "Phone": "89881108807",
+      "Mail": "eviolspirid@mail.ru"
+    }
+  },
+  {
+    "Fio": {
+      "Surname": "Ferg",
+      "Name": "Serg",
+      "Patron": "Otlichnovich"
+    },
+    "Curriculum": {
+      "Faculty": "MIT",
+      "Specialty": "programmer",
+      "Course": "4",
+      "Group": "MIT-20-1"
+    },
+    "Address": {
+      "City": "Stambul",
+      "PstIndex": "200113",
+      "Street": "st, MIT"
+    },
+    "Contacts": {
+      "Phone": "80001324432",
+      "Mail": "FergSerg@gmail.com"
+    }
+  },
+  {
+    "Fio": {
+      "Surname": "MOLOTKOV",
+      "Name": "Serg",
+      "Patron": "Miheev"
+    },
+    "Curriculum": {
+      "Faculty": "mgimo",
+      "Specialty": "electric",
+      "Course": "2",
+      "Group": "elec-20-1"
+    },
+    "Address": {
+      "City": "Moscow",
+      "PstIndex": "340552",
+      "Street": "Tverskaya"
+    },
+    "Contacts": {
+      "Phone": "89001202203",
+      "Mail": "sergmiheev@gmail.com"
+    }
+  }
+]

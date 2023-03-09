@@ -3,14 +3,11 @@ F:\my_projects\CnslApp\CnslApp\bin\Debug\net7.0\CnslApp.deps.json
 F:\my_projects\CnslApp\CnslApp\bin\Debug\net7.0\CnslApp.runtimeconfig.json
 F:\my_projects\CnslApp\CnslApp\bin\Debug\net7.0\CnslApp.dll
 F:\my_projects\CnslApp\CnslApp\bin\Debug\net7.0\CnslApp.pdb
-F:\my_projects\CnslApp\CnslApp\bin\Debug\net7.0\PrsnLib.dll
-F:\my_projects\CnslApp\CnslApp\bin\Debug\net7.0\PrsnLib.pdb
 F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\CnslApp.csproj.AssemblyReference.cache
 F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\CnslApp.GeneratedMSBuildEditorConfig.editorconfig
 F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\CnslApp.AssemblyInfoInputs.cache
 F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\CnslApp.AssemblyInfo.cs
 F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\CnslApp.csproj.CoreCompileInputs.cache
-F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\CnslApp.csproj.CopyComplete
 F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\CnslApp.dll
 F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\refint\CnslApp.dll
 F:\my_projects\CnslApp\CnslApp\obj\Debug\net7.0\CnslApp.pdb

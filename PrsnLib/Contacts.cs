@@ -1,7 +1,10 @@
 ﻿using System;
 
-public class Contacts
+namespace PrsnLib
 {
-    public string? Phone { get; set; } = "None";
-    public string? Mail { get; set; } = "None";
+    public class Contacts
+    {
+        public string? Phone { get; set; } = "None";
+        public string? Mail { get; set; } = "None";
+    }
 }

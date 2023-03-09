@@ -17,6 +17,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using PrsnLib;
 
 namespace csSharpJWPF
 {
@@ -25,12 +26,13 @@ namespace csSharpJWPF
     /// </summary>
     public partial class Window1 : Window
     {
+        PathContent way = new PathContent(); 
         static string Path = @"content.json";
         public Window1()
         {
             InitializeComponent();
             var options = new JsonSerializerOptions { Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic), WriteIndented = true };
-            List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(Path), options);
+            List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(way.Get_Path()), options);
             MyGrid.ItemsSource = humans;
         }
         public void Mouse_click(object e, RoutedEventArgs arg)

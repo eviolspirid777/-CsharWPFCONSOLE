@@ -13,21 +13,11 @@
         "runtime": {
           "CnslApp.dll": {}
         }
-      },
-      "PrsnLib/1.0.0": {
-        "runtime": {
-          "PrsnLib.dll": {}
-        }
       }
     }
   },
   "libraries": {
     "CnslApp/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "PrsnLib/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

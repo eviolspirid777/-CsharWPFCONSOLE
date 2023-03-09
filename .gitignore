@@ -13,7 +13,7 @@
 /WPFApp/bin/Debug/net7.0-windows/WPFApp.dll
 /WPFApp/bin/Debug/net7.0-windows/WPFApp.pdb
 # Build results
-[Bb]in/
+/**/[Bb]in/**/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/

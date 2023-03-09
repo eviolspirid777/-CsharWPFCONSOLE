@@ -44,8 +44,18 @@ namespace csSharpJWPF
                     tempHumans.Add(e);
                 }
             string getinf = JsonSerializer.Serialize<List<Person>>(tempHumans, options);
-            File.WriteAllText(@"filt.json", jsonString);
-            MyGrid.ItemsSource = tempHumans;
+            FileInfo file = new FileInfo(@"filt.json");
+            if(file.Exists)
+            {
+                File.WriteAllText(@"filt.json", jsonString);
+                MyGrid.ItemsSource = tempHumans;
+            }
+            else
+            {
+                StreamWriter sw = File.CreateText(@"filt.json");
+                File.WriteAllText(@"filt.json", jsonString);
+                MyGrid.ItemsSource = tempHumans;
+            }
         }
     }
 }

@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PrsnLib;
 
 namespace csSharpJWPF
 {
@@ -37,10 +38,22 @@ namespace csSharpJWPF
 
         public void Button_click_List(object e, EventArgs args)
         {
+            PathContent path = new PathContent();
+            FileInfo fileInf = new FileInfo(path.Get_Path());
             LstMen.Opacity = LstMen.Opacity - 0.05;
-            Window1 window1 = new Window1();
-            this.Close();
-            window1.Show();
+            if (fileInf.Exists == true)
+            {
+                Window1 window1 = new Window1();
+                this.Close();
+                window1.Show();
+            }
+            else
+            {
+                StreamWriter sw = File.CreateText(path.Get_Path());
+                Window1 window1 = new Window1();
+                this.Close();
+                window1.Show();
+            }
         }
         public void Button_click_Add(object e, EventArgs args)
         {

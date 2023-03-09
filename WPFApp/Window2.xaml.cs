@@ -57,7 +57,7 @@ namespace csSharpJWPF
                 person.Contacts.Mail = Mail.Text; 
                 humans.Add(person);
                 string jsonString = JsonSerializer.Serialize(humans, options);     //сериализация, где exmp - список <List>, options настройки
-                File.WriteAllText(@"content.json", jsonString);                 //@"content.json" - файл; jsonstring - строка, которую надо записать
+                File.WriteAllText(way.Get_Path(), jsonString);                 //@"content.json" - файл; jsonstring - строка, которую надо записать
                 MainWindow wndo = new MainWindow();
                 wndo.Show();
                 this.Close();

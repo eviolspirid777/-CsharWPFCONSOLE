@@ -27,7 +27,6 @@ namespace csSharpJWPF
     public partial class Window1 : Window
     {
         PathContent way = new PathContent(); 
-        static string Path = @"content.json";
         public Window1()
         {
             InitializeComponent();

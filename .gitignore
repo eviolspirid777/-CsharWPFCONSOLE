@@ -26,3 +26,6 @@ bld/
 /**/[Ff]ileContentIndex/**/
 /.vs/CnslApp/v17/.suo
 /.vs/
+/PrsnLib/bin/
+/WPFApp/bin/
+/CnslApp/bin/

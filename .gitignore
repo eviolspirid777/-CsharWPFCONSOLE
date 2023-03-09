@@ -29,3 +29,11 @@ bld/
 /PrsnLib/bin/
 /WPFApp/bin/
 /CnslApp/bin/
+/PrsnLib/obj/Debug/net7.0/PrsnLib.assets.cache
+/PrsnLib/obj/project.nuget.cache
+/CnslApp/obj/project.nuget.cache
+/CnslApp/obj/Debug/net7.0/CnslApp.assets.cache
+/.vs/CnslApp/DesignTimeBuild/.dtbcache.v2
+/CnslApp/obj/Debug/net7.0/CnslApp.genruntimeconfig.cache
+/WPFApp/obj/Debug/net7.0-windows/WPFApp.assets.cache
+/WPFApp/obj/project.nuget.cache

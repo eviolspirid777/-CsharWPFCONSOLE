@@ -226,7 +226,12 @@ internal class Program
             PrintMenu();
         }
         else
-            Console.WriteLine("Не могу найти файл!");
+        {
+            Console.WriteLine("Не могу найти файл! Создаю новый...");
+            StreamWriter sw = File.CreateText(path.Get_Path());
+            Thread.Sleep(1000);
+            ListMenu();
+        }
     }
 
     static void AddNode()

@@ -37,3 +37,6 @@ bld/
 /CnslApp/obj/Debug/net7.0/CnslApp.genruntimeconfig.cache
 /WPFApp/obj/Debug/net7.0-windows/WPFApp.assets.cache
 /WPFApp/obj/project.nuget.cache
+/CnslApp/obj/Debug/net7.0/CnslApp.csproj.AssemblyReference.cache
+/CnslApp/obj/Debug/net7.0/CnslApp.csproj.CoreCompileInputs.cache
+/WPFApp/obj/Debug/net7.0-windows/WPFApp_MarkupCompile.i.cache

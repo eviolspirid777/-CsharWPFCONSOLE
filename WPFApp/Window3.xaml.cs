@@ -39,7 +39,7 @@ namespace csSharpJWPF
             List<Person> humans = JsonSerializer.Deserialize<List<Person>>(jsonString);
             List<Person> tempHumans = new List<Person>();
             foreach (var e in humans)
-                if (e.Fio.Name.Contains(text) || e.Fio.Surname.Contains(text) || e.Fio.Patron.Contains(text) || e.Curriculum.Faculty.Contains(text) || e.Curriculum.Specialty.Contains(text) || e.Curriculum.Course.Contains(text) || e.Curriculum.Group.Contains(text) || e.Address.City.Contains(text) || e.Address.PstIndex.Contains(text) || e.Address.Street.Contains(text) || e.Contacts.Phone.Contains(text) || e.Contacts.Mail.Contains(text))
+                if (e.Fio.Name.Contains(text) || e.Fio.Surname.Contains(text) || e.Fio.Patron.Contains(text))
                 {
                     tempHumans.Add(e);
                 }

@@ -26,7 +26,6 @@ namespace csSharpJWPF
     /// </summary>
     public partial class Window3 : Window
     {
-        PathContent way = new PathContent();
         public Window3(string text)
         {
             InitializeComponent();
@@ -35,7 +34,7 @@ namespace csSharpJWPF
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),       //настройки для сериалайзера
                 WriteIndented = true
             };
-            string jsonString = File.ReadAllText(way.GetPath());
+            string jsonString = File.ReadAllText(PathContent.GetPath());
             List<Person> humans = JsonSerializer.Deserialize<List<Person>>(jsonString);
             List<Person> tempHumans = new List<Person>();
             foreach (var e in humans)

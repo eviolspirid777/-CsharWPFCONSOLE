@@ -26,7 +26,6 @@ namespace csSharpJWPF
     /// </summary>
     public partial class Window2 : Window
     {
-        PathContent way = new PathContent();
         static string Path = @"content.json";
         Person person = new Person();
 
@@ -42,7 +41,7 @@ namespace csSharpJWPF
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),       //настройки для сериалайзера
                 WriteIndented = true
             };
-                List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(way.GetPath()), options);
+                List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()), options);
                 person.Fio.Surname = Surname.Text;
                 person.Fio.Name = Name.Text; 
                 person.Fio.Patron = Patron.Text; 
@@ -57,7 +56,7 @@ namespace csSharpJWPF
                 person.Contacts.Mail = Mail.Text; 
                 humans.Add(person);
                 string jsonString = JsonSerializer.Serialize(humans, options);     //сериализация, где exmp - список <List>, options настройки
-                File.WriteAllText(way.GetPath(), jsonString);                 //@"content.json" - файл; jsonstring - строка, которую надо записать
+                File.WriteAllText(PathContent.GetPath(), jsonString);                 //@"content.json" - файл; jsonstring - строка, которую надо записать
                 MainWindow wndo = new MainWindow();
                 wndo.Show();
                 this.Close();

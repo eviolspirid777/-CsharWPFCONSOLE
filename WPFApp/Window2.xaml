@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:csSharpJWPF"
         mc:Ignorable="d"
-        Title="Add Student" Height="880" Width="800" Background="#696969">
+        Title="Add Student" Height="890" Width="800" Background="#696969">
     <Grid>
         <StackPanel>
             <GroupBox Header="Фамилия" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите фамилию студента">
@@ -44,7 +44,8 @@
             <GroupBox Header="Почта" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите почту студента">
                 <TextBox x:Name="Mail"  Height="30"/>
             </GroupBox>
-            <Button x:Name="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Добавить" Width="200" Height="60" Background="#C0C0C0" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#696969" Click="Key_Down" FlowDirection="RightToLeft" Padding="1,-1,1,1" Margin="0,2,0,0"/>
+            <Button x:Name="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Добавить" Width="200" Height="60" Background="#C0C0C0" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#696969" Click="Key_Down" FlowDirection="RightToLeft" Padding="1,-1,1,1" Margin="0,2,3,0"/>
+            <Button x:Name="Exit" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Выйти" Width="200" Height="60" Background="#C0C0C0" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#696969" Click="Exit_Key" IsCancel="True" FlowDirection="LeftToRight" Padding="1,-1,1,1" Margin="3,-59,0,0"/>
         </StackPanel>
     </Grid>
 </Window>

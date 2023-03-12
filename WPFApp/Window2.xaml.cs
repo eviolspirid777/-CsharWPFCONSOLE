@@ -61,6 +61,10 @@ namespace csSharpJWPF
                 wndo.Show();
                 this.Close();
         }
+        private void Exit_Key(object sender, EventArgs e)
+        {
+            this.Close();
+        }
         /*
         private void MyTextBox_KeyDown_Surname(object sender, KeyEventArgs e)
         {

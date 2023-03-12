@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Window3" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="MyGrid" AutoGenerateColumns="False" IsReadOnly="True" Background="#A9A9A9" FontSize="15">
+        <Button x:Name="Exit" IsCancel="True" Click="Exit_Click"/>
+            <DataGrid x:Name="MyGrid" AutoGenerateColumns="False" IsReadOnly="True" Background="#A9A9A9" FontSize="15">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding Fio.Surname}" />
                 <DataGridTextColumn Header="Имя" Binding="{Binding Fio.Name}" />
@@ -20,7 +21,6 @@
                 <DataGridTextColumn Header="Город" Binding="{Binding Address.City}" />
                 <DataGridTextColumn Header="Почтовый индекс" Binding="{Binding Address.PstIndex}" />
                 <DataGridTextColumn Header="Улица" Binding="{Binding Address.Street}" />
-                <DataGridTextColumn Header="Телефон" Binding="{Binding Contacts.Phone}" />
                 <DataGridTextColumn Header="Почта" Binding="{Binding Contacts.Mail}" />
             </DataGrid.Columns>
         </DataGrid>

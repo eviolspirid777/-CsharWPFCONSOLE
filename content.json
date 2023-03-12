@@ -1,8 +1,8 @@
 [
   {
     "Fio": {
-      "Surname": "Мисюрин",
-      "Name": "Кирилл",
+      "Surname": "Бред",
+      "Name": "Пит",
       "Patron": "Владимирович"
     },
     "Curriculum": {
@@ -23,9 +23,9 @@
   },
   {
     "Fio": {
-      "Surname": "Ferg",
-      "Name": "Serg",
-      "Patron": "Otlichnovich"
+      "Surname": "Кравченко",
+      "Name": "Виктор",
+      "Patron": "Васильевич"
     },
     "Curriculum": {
       "Faculty": "MIT",
@@ -45,9 +45,9 @@
   },
   {
     "Fio": {
-      "Surname": "MOLOTKOV",
-      "Name": "Serg",
-      "Patron": "Miheev"
+      "Surname": "Олейникова",
+      "Name": "Алеся",
+      "Patron": "Владимировна"
     },
     "Curriculum": {
       "Faculty": "mgimo",

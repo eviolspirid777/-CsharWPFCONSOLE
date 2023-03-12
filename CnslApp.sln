@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CnslApp", "CnslApp\CnslApp.csproj", "{38BBAFE6-6AD6-450E-87EB-9D57FBA125BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CnslApp", "CnslApp\CnslApp.csproj", "{38BBAFE6-6AD6-450E-87EB-9D57FBA125BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrsnLib", "PrsnLib\PrsnLib.csproj", "{DA9833C2-0F6C-420C-9B4A-6C05B5C0BF15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrsnLib", "PrsnLib\PrsnLib.csproj", "{DA9833C2-0F6C-420C-9B4A-6C05B5C0BF15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFApp", "WPFApp\WPFApp.csproj", "{BC2C06CB-4264-4EC6-A699-AE121AF669EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFApp", "WPFApp\WPFApp.csproj", "{BC2C06CB-4264-4EC6-A699-AE121AF669EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

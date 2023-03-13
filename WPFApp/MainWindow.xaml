@@ -9,8 +9,8 @@
     <Grid>
         <DataGrid x:Name="MyGrid" AutoGenerateColumns="False" IsReadOnly="True" Background="#A9A9A9" FontSize="15" Margin="0,0,0,45">
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Имя" Binding="{Binding Fio.Name}" />
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding Fio.Surname}"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Fio.Name}" />
                 <DataGridTextColumn Header="Отчество" Binding="{Binding Fio.Patron}" />
                 <DataGridTextColumn Header="Город" Binding="{Binding Address.City}" />
                 <DataGridTextColumn Header="Почтовый индекс" Binding="{Binding Address.PstIndex}" />

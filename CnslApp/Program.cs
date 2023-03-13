@@ -113,8 +113,8 @@ internal class Program
                 switch (t)
                 {
                     case "1":
-                        exmp[number].Fio.Name = EnterRes("Имя");
                         exmp[number].Fio.Surname = EnterRes("Фамилия");
+                        exmp[number].Fio.Name = EnterRes("Имя");
                         exmp[number].Fio.Patron = EnterRes("Отчество");
                         break;
                     case "2":

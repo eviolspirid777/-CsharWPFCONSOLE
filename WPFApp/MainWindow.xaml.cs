@@ -28,8 +28,8 @@ namespace csSharpJWPF
         {
             InitializeComponent();
             var options = new JsonSerializerOptions { Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic), WriteIndented = true };
-            List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()), options);
-            MyGrid.ItemsSource = humans;
+            List<Person> Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()), options);
+            MyGrid.ItemsSource = Persons;
         }
         public void Mouse_click(object e, RoutedEventArgs arg)
         {
@@ -46,14 +46,14 @@ namespace csSharpJWPF
                 WriteIndented = true
             };
             string jsonString = File.ReadAllText(PathContent.GetPath());
-            List<Person> humans = JsonSerializer.Deserialize<List<Person>>(jsonString);
-            List<Person> tempHumans = new List<Person>();
-            foreach (var exp in humans)
+            List<Person> Persons = JsonSerializer.Deserialize<List<Person>>(jsonString);
+            List<Person> tempPersons = new List<Person>();
+            foreach (var exp in Persons)
                 if (exp.Fio.Name.ToLower().Contains(keyword.Text) || exp.Fio.Surname.ToLower().Contains(keyword.Text) || exp.Fio.Patron.ToLower().Contains(keyword.Text) || exp.Fio.Name.ToUpper().Contains(keyword.Text) || exp.Fio.Surname.ToUpper().Contains(keyword.Text) || exp.Fio.Patron.ToUpper().Contains(keyword.Text) || exp.Fio.Name.Contains(keyword.Text) || exp.Fio.Surname.Contains(keyword.Text) || exp.Fio.Patron.Contains(keyword.Text))
                 {
-                    tempHumans.Add(exp);
+                    tempPersons.Add(exp);
                 }
-            MyGrid.ItemsSource = tempHumans;
+            MyGrid.ItemsSource = tempPersons;
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {

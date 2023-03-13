@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:csSharpJWPF"
         mc:Ignorable="d"
-        Title="Add Student" Height="890" Width="800" Background="#696969">
+        Title="Add Student" Height="890" Width="800" Background="#696969" ResizeMode="CanMinimize">
     <Grid>
         <StackPanel>
             <GroupBox Header="Фамилия" Padding="5" Foreground="White" FontSize="14" ToolTip="Введите фамилию студента">

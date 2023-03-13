@@ -38,8 +38,6 @@ namespace csSharpJWPF
         }
         public void Mouse_click_Filt(object e, RoutedEventArgs arg)
         {
-            //           Window3 wnd = new Window3(keyword.Text);
-            //           wnd.Show();
             var options = new JsonSerializerOptions
             {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),       //настройки для сериалайзера

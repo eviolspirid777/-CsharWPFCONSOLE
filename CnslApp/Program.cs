@@ -227,16 +227,25 @@ internal class Program
         Console.WriteLine("Введите ключевое слово:");
         string sw = Console.ReadLine();
         Console.Clear();
-        bool flag = true;
-        foreach (var person in humans)
+        var filteredList = humans.Where(person =>
+            person.Fio.Surname.Contains(sw) ||
+            person.Fio.Name.Contains(sw) ||
+            person.Fio.Patron.Contains(sw) ||
+            person.Fio.Name.ToLower().Contains(sw) ||
+            person.Fio.Surname.ToLower().Contains(sw) ||
+            person.Fio.Patron.ToLower().Contains(sw) ||
+            person.Fio.Surname.ToUpper().Contains(sw) ||
+            person.Fio.Name.ToUpper().Contains(sw) ||
+            person.Fio.Patron.ToUpper().Contains(sw)
+        );
+        if (filteredList.Count() > 0)
         {
-            if (person.Fio.Surname.Contains(sw) || person.Fio.Name.Contains(sw) || person.Fio.Patron.Contains(sw) || person.Fio.Name.ToLower().Contains(sw) || person.Fio.Surname.ToLower().Contains(sw) || person.Fio.Patron.ToLower().Contains(sw) || person.Fio.Surname.ToUpper().Contains(sw) || person.Fio.Name.ToUpper().Contains(sw) || person.Fio.Patron.ToUpper().Contains(sw))
+            foreach (var person in filteredList)
             {
-                flag = false;
                 Console.WriteLine(person.GetInfo());
             }
         }
-        if (flag == true)
+        else
         {
             Console.WriteLine("Не нашел записей..!");
         }

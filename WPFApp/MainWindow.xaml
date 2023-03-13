@@ -25,7 +25,7 @@
         </DataGrid>
         <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" FlowDirection="RightToLeft">
             <Button Content="Добавить студента"  HorizontalAlignment="Right" Height="45" Width="187" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,-43,0,0" Click="Mouse_click"/>
-            <Button HorizontalAlignment="Left" Height="45" Width="187" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,-43,0,0"  Content="Фильтровать" Click="Mouse_click_Filt" />
+            <Button HorizontalAlignment="Left" Height="45" Width="187" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,-43,0,0"  Content="Фильтровать" Click="Mouse_click_Filt" ToolTip="Нажмите esc, чтобы получить полный список студентов" />
         </StackPanel>
         <Canvas VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="45" Width="425">
             <GroupBox Header="Ключевое слово" Padding="0" FontSize="12" ToolTip="Нужно ввести ключевое слово для фильтрации" Margin="193,-1,0,0">

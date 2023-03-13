@@ -50,51 +50,7 @@ internal class Program
         string text = Console.ReadLine();
         return text;
     }
-    static void EdittingNode(int count, ref List<Person> exmp)
-    {
-        Console.WriteLine("Введите номер записи, которую хотите изменить:");
-        int num = Convert.ToInt32(Console.ReadLine()) - 1;
-        if (num <= exmp.Capacity)
-        {
-            Console.WriteLine("Что вы хотите изменить:\n1)ФИО\n2)Город\n3)Почтовый индекс\n4)Улицу\n5)Почту\n6)Телефон\n7)Факультет\n8)Курс\n9)Группу\n10)Специальность\n");
-            int t = Convert.ToInt32(Console.ReadLine());
-            switch (t)
-            {
-                case 1:
-                    exmp[num].Fio.Name = EnterRes("Имя");
-                    exmp[num].Fio.Surname = EnterRes("Фамилия");
-                    exmp[num].Fio.Patron = EnterRes("Отчество");
-                    break;
-                case 2:
-                    exmp[num].Address.City = EnterRes("Город");
-                    break;
-                case 3:
-                    exmp[num].Address.PstIndex = EnterRes("Почтовый индекс");
-                    break;
-                case 4:
-                    exmp[num].Address.Street = EnterRes("Улица");
-                    break;
-                case 5:
-                    exmp[num].Contacts.Mail = EnterRes("Почта");
-                    break;
-                case 6:
-                    exmp[num].Contacts.Phone = EnterRes("Телефон");
-                    break;
-                case 7:
-                    exmp[num].Curriculum.Faculty = EnterRes("Факультет");
-                    break;
-                case 8:
-                    exmp[num].Curriculum.Course = EnterRes("Курс");
-                    break;
-                case 9:
-                    exmp[num].Curriculum.Group = EnterRes("Группа");
-                    break;
-                case 10:
-                    exmp[num].Curriculum.Specialty = EnterRes("Специальность");
-                    break;
-            }
-        }
-    }
+
 
     static void EditNode(int count, ref List<Person> exmp)
     {
@@ -164,14 +120,8 @@ internal class Program
             Thread.Sleep(1000);
             EditNode(count, ref exmp);
         }
-
-        var options = new JsonSerializerOptions
-        {
-            Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
-            WriteIndented = true
-        };
-        string jsonString = JsonSerializer.Serialize(exmp, options);
-        File.WriteAllText(PathContent.GetPath(), jsonString);
+        string jsonString = JsonSerializer.Serialize(exmp, FileWork.Options());
+        FileWork.WriteTxt(PathContent.GetPath(), jsonString);
     }
 
     static void FillExmp(ref Person temper)
@@ -219,8 +169,7 @@ internal class Program
     }
     static void ListMenu()
     {
-        FileInfo fileInf = new FileInfo(PathContent.GetPath());
-        if (fileInf.Exists)
+        if (FileWork.Exist(PathContent.GetPath()))
         {
             string jsonString = File.ReadAllText(PathContent.GetPath());
             List<Person> exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!; //ПРЕДСТАВИТЬ ВВИДЕ МАССИВА И ОТРАБОТАТЬ КАЖДЫЙ ЭЛЕМЕНТ ЧЕРЕЗ ЦИКЛ
@@ -233,7 +182,7 @@ internal class Program
         else
         {
             Console.WriteLine("Не могу найти файл! Создаю новый...");
-            StreamWriter sw = File.CreateText(PathContent.GetPath());
+            FileWork.CreateFile(PathContent.GetPath());
             Thread.Sleep(1000);
             ListMenu();
         }
@@ -241,8 +190,7 @@ internal class Program
 
     static void AddNode()
     {
-        FileInfo fileInf = new FileInfo(PathContent.GetPath());
-        if (fileInf.Exists)
+        if (FileWork.Exist(PathContent.GetPath()))
         {
             var humans = new List<Person>();
             string flag = "";
@@ -255,12 +203,7 @@ internal class Program
             FillExmp(ref temp);
             Console.Clear();
             humans.Add(temp);
-            var options = new JsonSerializerOptions
-            {
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
-                WriteIndented = true
-            };
-            string jsonString = JsonSerializer.Serialize(humans, options);
+            string jsonString = JsonSerializer.Serialize(humans, FileWork.Options());
             File.WriteAllText(PathContent.GetPath(), jsonString);
             Console.Clear();
             PrintMenu();
@@ -281,76 +224,21 @@ internal class Program
     static void Filt()
     {
         List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()));
-        Console.WriteLine("Введите, по какому атрибуту вы хотите провести фильтрацию:\n1)Фамилия\n2)Имя\n3)Отчество");
+        Console.WriteLine("Введите ключевое слово:");
         string sw = Console.ReadLine();
         Console.Clear();
-        switch (sw)
+        bool flag = true;
+        foreach (var person in humans)
         {
-            case "1":
-                {
-                    Console.WriteLine("Введите фамилию:");
-                    string surname = Console.ReadLine();
-                    Console.Clear();
-                    bool flag = false;
-                    foreach (var person in humans)
-                    {
-                        if (person.Fio.Surname.Contains(surname))
-                        {
-                            string t = person.GetInfo();
-                            Console.WriteLine(t);
-                            flag = true;
-                        }
-                    }
-                    if (flag == false)
-                        Console.WriteLine("Не могу найти записи с данной фамилией!");
-                    break;
-                }
-            case "2":
-                {
-                    Console.WriteLine("Введите имя:");
-                    string name = Console.ReadLine();
-                    Console.Clear();
-                    bool flag = false;
-                    foreach (var person in humans)
-                    {
-                        if (person.Fio.Name.Contains(name))
-                        {
-                            string t = person.GetInfo();
-                            Console.WriteLine(t);
-                            flag = true;
-                        }
-                    }
-                    if (flag == false)
-                        Console.WriteLine("Не могу найти записи с данным именем!");
-                    break;
-                }
-            case "3":
-                {
-                    Console.WriteLine("Введите Отчество:");
-                    string patron = Console.ReadLine();
-                    Console.Clear();
-                    bool flag = false;
-                    foreach (var person in humans)
-                    {
-                        if (person.Fio.Patron.Contains(patron))
-                        {
-                            string t = person.GetInfo();
-                            Console.WriteLine(t);
-                            flag = true;
-                        }
-                    }
-                    if (flag == false)
-                        Console.WriteLine("Не могу найти записи с данным отчеством!");
-                    break;
-                }
-            default:
-                {
-                    Console.WriteLine("Введен неправильный аттрибут!");
-                    Console.ReadKey();
-                    Console.Clear();
-                    Filt();
-                    break;
-                }
+            if (person.Fio.Surname.Contains(sw) || person.Fio.Name.Contains(sw) || person.Fio.Patron.Contains(sw) || person.Fio.Name.ToLower().Contains(sw) || person.Fio.Surname.ToLower().Contains(sw) || person.Fio.Patron.ToLower().Contains(sw) || person.Fio.Surname.ToUpper().Contains(sw) || person.Fio.Name.ToUpper().Contains(sw) || person.Fio.Patron.ToUpper().Contains(sw))
+            {
+                flag = false;
+                Console.WriteLine(person.GetInfo());
+            }
+        }
+        if (flag == true)
+        {
+            Console.WriteLine("Не нашел записей..!");
         }
         Console.WriteLine("\n\nНажмите любую клавишу...");
         Console.ReadKey();

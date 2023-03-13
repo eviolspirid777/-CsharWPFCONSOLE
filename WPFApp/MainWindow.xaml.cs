@@ -45,13 +45,17 @@ namespace csSharpJWPF
             };
             string jsonString = File.ReadAllText(PathContent.GetPath());
             List<Person> Persons = JsonSerializer.Deserialize<List<Person>>(jsonString);
-            List<Person> tempPersons = new List<Person>();
-            foreach (var exp in Persons)
-                if (exp.Fio.Name.ToLower().Contains(keyword.Text) || exp.Fio.Surname.ToLower().Contains(keyword.Text) || exp.Fio.Patron.ToLower().Contains(keyword.Text) || exp.Fio.Name.ToUpper().Contains(keyword.Text) || exp.Fio.Surname.ToUpper().Contains(keyword.Text) || exp.Fio.Patron.ToUpper().Contains(keyword.Text) || exp.Fio.Name.Contains(keyword.Text) || exp.Fio.Surname.Contains(keyword.Text) || exp.Fio.Patron.Contains(keyword.Text))
-                {
-                    tempPersons.Add(exp);
-                }
-            MyGrid.ItemsSource = tempPersons;
+            MyGrid.ItemsSource = Persons.Where(Persons => 
+            Persons.Fio.Name.ToLower().Contains(keyword.Text)
+            || Persons.Fio.Surname.ToLower().Contains(keyword.Text)
+            || Persons.Fio.Patron.ToLower().Contains(keyword.Text)
+            || Persons.Fio.Name.ToUpper().Contains(keyword.Text)
+            || Persons.Fio.Surname.ToUpper().Contains(keyword.Text)
+            || Persons.Fio.Patron.ToUpper().Contains(keyword.Text)
+            || Persons.Fio.Name.Contains(keyword.Text)
+            || Persons.Fio.Surname.Contains(keyword.Text) 
+            || Persons.Fio.Patron.Contains(keyword.Text)
+            );
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {

@@ -5,12 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:csSharpJWPF"
         mc:Ignorable="d"
-        Title="Start desktop" Height="450" Width="525" Background="#A9A9A9" ResizeMode="CanMinimize">
-    <Grid ShowGridLines="False" HorizontalAlignment="Left" VerticalAlignment="Bottom" >
-        <DockPanel VerticalAlignment="Bottom" HorizontalAlignment="Left">
-            <Button x:Name="LstMen" Height="30" Width="262.5"  Content="Список студентов" Background="#696969"  ToolTip="Выводит на экран список студентов" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Click="Button_click_List" HorizontalAlignment="Center" Canvas.Top="-30" VerticalAlignment="Top"/>
-            <Button x:Name ="Add" Height="30"  Width="262.5" Background="#696969" Content="Добавить Студента" ToolTip="Добавляет в список студента" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Click="Button_click_Add" Canvas.Left="-263" Canvas.Top="-30"/>
-        </DockPanel>
-        <Button x:Name="Exit" Content="Выход" Background="#696969" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" BorderBrush="#FFBBABAB" FontSize="18" Click="Exit_click" IsCancel="True" Width="0" Height="0"/>
+        Title="Student's Table" Height="450" Width="900" Background="#A9A9A9" ResizeMode="CanMinimize">
+    <Grid>
+        <DataGrid x:Name="MyGrid" AutoGenerateColumns="False" IsReadOnly="True" Background="#A9A9A9" FontSize="15" Margin="0,0,0,45">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Имя" Binding="{Binding Fio.Name}" />
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Fio.Surname}"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Fio.Patron}" />
+                <DataGridTextColumn Header="Город" Binding="{Binding Address.City}" />
+                <DataGridTextColumn Header="Почтовый индекс" Binding="{Binding Address.PstIndex}" />
+                <DataGridTextColumn Header="Улица" Binding="{Binding Address.Street}" />
+                <DataGridTextColumn Header="Почта" Binding="{Binding Contacts.Mail}" />
+                <DataGridTextColumn Header="Телефон" Binding="{Binding Contacts.Phone}" />
+                <DataGridTextColumn Header="Курс" Binding="{Binding Curriculum.Course}" />
+                <DataGridTextColumn Header="Факультет" Binding="{Binding Curriculum.Faculty}" />
+                <DataGridTextColumn Header="Группа" Binding="{Binding Curriculum.Group}" />
+                <DataGridTextColumn Header="Специальность" Binding="{Binding Curriculum.Specialty}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button Content="Добавить студента"  HorizontalAlignment="Right" Height="45" Width="187" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,-43,0,0" Click="Mouse_click"/>
+            <Button HorizontalAlignment="Left" Height="45" Width="187" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,-43,0,0"  Content="Фильтровать" Click="Mouse_click_Filt" />
+        </StackPanel>
+        <Canvas VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="45" Width="425">
+            <GroupBox Header="Ключевое слово" Padding="0" FontSize="12" ToolTip="Нужно ввести ключевое слово для фильтрации" Margin="193,-1,0,0">
+                <TextBox x:Name="keyword" Width="200" Margin="0,0,0,0"/>
+            </GroupBox>
+        </Canvas>
+        <Button x:Name="Butt1" Height="0" Width="0" IsCancel="True" Click="Exit_Click"/>
     </Grid>
 </Window>

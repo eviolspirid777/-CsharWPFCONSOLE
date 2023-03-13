@@ -27,53 +27,39 @@ namespace csSharpJWPF
         public MainWindow()
         {
             InitializeComponent();
-            /* Button myButton = new Button();
-             myButton.Width = 100;
-             myButton.Height = 30;
-             myButton.Content = "Кнопка";
-             layoutGrid.Children.Add(myButton);
-            */
+            var options = new JsonSerializerOptions { Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic), WriteIndented = true };
+            List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()), options);
+            MyGrid.ItemsSource = humans;
         }
-
-
-        public void Button_click_List(object e, EventArgs args)
+        public void Mouse_click(object e, RoutedEventArgs arg)
         {
-            FileInfo fileInf = new FileInfo(PathContent.GetPath());
-            LstMen.Opacity = LstMen.Opacity - 0.05;
-            if (fileInf.Exists == true)
+            Window2 wnd = new Window2();
+            wnd.Show();
+        }
+        public void Mouse_click_Filt(object e, RoutedEventArgs arg)
+        {
+            //           Window3 wnd = new Window3(keyword.Text);
+            //           wnd.Show();
+            var options = new JsonSerializerOptions
             {
-                Window1 window1 = new Window1();
-                this.Close();
-                window1.Show();
-            }
-            else
-            {
-                StreamWriter sw = File.CreateText(PathContent.GetPath());
-                Window1 window1 = new Window1();
-                this.Close();
-                window1.Show();
-            }
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),       //настройки для сериалайзера
+                WriteIndented = true
+            };
+            string jsonString = File.ReadAllText(PathContent.GetPath());
+            List<Person> humans = JsonSerializer.Deserialize<List<Person>>(jsonString);
+            List<Person> tempHumans = new List<Person>();
+            foreach (var exp in humans)
+                if (exp.Fio.Name.ToLower().Contains(keyword.Text) || exp.Fio.Surname.ToLower().Contains(keyword.Text) || exp.Fio.Patron.ToLower().Contains(keyword.Text) || exp.Fio.Name.ToUpper().Contains(keyword.Text) || exp.Fio.Surname.ToUpper().Contains(keyword.Text) || exp.Fio.Patron.ToUpper().Contains(keyword.Text) || exp.Fio.Name.Contains(keyword.Text) || exp.Fio.Surname.Contains(keyword.Text) || exp.Fio.Patron.Contains(keyword.Text))
+                {
+                    tempHumans.Add(exp);
+                }
+            MyGrid.ItemsSource = tempHumans;
         }
-        public void Button_click_Add(object e, EventArgs args)
+        private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            Add.Opacity = Add.Opacity - 0.05;
-            Window2 win2 = new Window2();
-            this.Close();
-            win2.Show();
+            var options = new JsonSerializerOptions { Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic), WriteIndented = true };
+            List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()), options);
+            MyGrid.ItemsSource = humans;
         }
-        public void Exit_click(object e, EventArgs args)
-        {
-            Close();
-        }
-
-        /*
-public void Button_click1(object e, RoutedEventArgs arg)
-{
-   First.Content = "Pervii";
-   First.Width = First.Width + 20;
-   First.Height = First.Height + 20;
-   First.Opacity = First.Opacity - 0.0005;
-}
-*/
     }
 }

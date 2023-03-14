@@ -29,24 +29,19 @@ namespace csSharpJWPF
         {
             InitializeComponent();
             var options = new JsonSerializerOptions { Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic), WriteIndented = true };
-            List<Person> Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()), options);
+            List<Person> Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()), options);
             MyGrid.ItemsSource = Persons;
         }
         public void Mouse_click(object e, RoutedEventArgs arg)
         {
-            Window2 wnd = new Window2();
-            wnd.Show();
+            Window2 window = new Window2();
+            window.Show();
             this.Close();
         }
         public void Mouse_click_Filt(object e, RoutedEventArgs arg)
         {
-            var options = new JsonSerializerOptions
-            {
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),       //настройки для сериалайзера
-                WriteIndented = true
-            };
-            string jsonString = File.ReadAllText(PathContent.GetPath());
-            List<Person> Persons = JsonSerializer.Deserialize<List<Person>>(jsonString);
+            string jsonString = File.ReadAllText(FileWork.GetPath());
+            List<Person> Persons = JsonSerializer.Deserialize<List<Person>>(jsonString, FileWork.Options());
             MyGrid.ItemsSource = Persons.Where(Persons => 
             Persons.Fio.Name.ToLower().Contains(keyword.Text)
             || Persons.Fio.Surname.ToLower().Contains(keyword.Text)
@@ -61,8 +56,8 @@ namespace csSharpJWPF
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()), FileWork.Options());
-            MyGrid.ItemsSource = humans;
+            List<Person> persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()), FileWork.Options());
+            MyGrid.ItemsSource = persons;
         }
     }
 }

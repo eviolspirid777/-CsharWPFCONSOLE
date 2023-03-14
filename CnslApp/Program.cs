@@ -123,7 +123,7 @@ internal class Program
             EditNode(count, ref exmp);
         }
         string jsonString = JsonSerializer.Serialize(exmp, FileWork.Options());
-        FileWork.WriteTxt(PathContent.GetPath(), jsonString);
+        FileWork.WriteText(FileWork.GetPath(), jsonString);
     }
     static void FillExmp(ref Person temper)
     {
@@ -183,9 +183,9 @@ internal class Program
     }
     static void ListMenu()
     {
-        if (FileWork.Exist(PathContent.GetPath()))
+        if (FileWork.Exist(FileWork.GetPath()))
         {
-            string jsonString = File.ReadAllText(PathContent.GetPath());
+            string jsonString = File.ReadAllText(FileWork.GetPath());
             List<Person> exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!; //ПРЕДСТАВИТЬ ВВИДЕ МАССИВА И ОТРАБОТАТЬ КАЖДЫЙ ЭЛЕМЕНТ ЧЕРЕЗ ЦИКЛ
             ExmpMenu(exp, out int counter);
             Console.WriteLine();
@@ -196,7 +196,7 @@ internal class Program
         else
         {
             Console.WriteLine("Не могу найти файл! Создаю новый...");
-            FileWork.CreateFile(PathContent.GetPath());
+            FileWork.CreateFile(FileWork.GetPath());
             Thread.Sleep(1000);
             ListMenu();
         }
@@ -204,21 +204,21 @@ internal class Program
 
     static void AddNode()
     {
-        if (FileWork.Exist(PathContent.GetPath()))
+        if (FileWork.Exist(FileWork.GetPath()))
         {
-            var humans = new List<Person>();
+            var persons = new List<Person>();
             string flag = "";
-            flag = File.ReadAllText(PathContent.GetPath()).Trim();
+            flag = File.ReadAllText(FileWork.GetPath()).Trim();
             if (flag != "")
             {
-                humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()));
+                persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
             }
             Person temp = new();
             FillExmp(ref temp);
             Console.Clear();
-            humans.Add(temp);
-            string jsonString = JsonSerializer.Serialize(humans, FileWork.Options());
-            File.WriteAllText(PathContent.GetPath(), jsonString);
+            persons.Add(temp);
+            string jsonString = JsonSerializer.Serialize(persons, FileWork.Options());
+            File.WriteAllText(FileWork.GetPath(), jsonString);
             Console.Clear();
             PrintMenu();
         }
@@ -228,20 +228,20 @@ internal class Program
 
     static void Sort()
     {
-        List<Person> human = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()));
-        human.Sort((p1, p2) => p1.Fio.Name.CompareTo(p2.Fio.Name));
-        ExmpMenu(human);
+        List<Person> person = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
+        person.Sort((p1, p2) => p1.Fio.Name.CompareTo(p2.Fio.Name));
+        ExmpMenu(person);
         Console.ReadKey();
         Console.Clear();
         PrintMenu();
     }
     static void Filt()
     {
-        List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()));
+        List<Person> persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
         Console.WriteLine("Введите ключевое слово:");
         string sw = Console.ReadLine();
         Console.Clear();
-        var filteredList = humans.Where(person =>
+        var filteredList = persons.Where(person =>
             person.Fio.Surname.Contains(sw) ||
             person.Fio.Name.Contains(sw) ||
             person.Fio.Patron.Contains(sw) ||

@@ -34,7 +34,7 @@ namespace csSharpJWPF
         private void Key_Down(object sender, RoutedEventArgs e)
         {
 
-                List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()), FileWork.Options());
+                List<Person> persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()), FileWork.Options());
                 person.Fio.Surname = Surname.Text;
                 person.Fio.Name = Name.Text; 
                 person.Fio.Patron = Patron.Text; 
@@ -47,11 +47,11 @@ namespace csSharpJWPF
                 person.Address.Street = Street.Text; 
                 person.Contacts.Phone = Phone.Text; 
                 person.Contacts.Mail = Mail.Text; 
-                humans.Add(person);
-                string jsonString = JsonSerializer.Serialize(humans, FileWork.Options());     //сериализация, где exmp - список <List>, options настройки
-                FileWork.WriteTxt(PathContent.GetPath(), jsonString);          //@"content.json" - файл; jsonstring - строка, которую надо записать
-                MainWindow wndo = new MainWindow();
-                wndo.Show();
+                persons.Add(person);
+                string jsonString = JsonSerializer.Serialize(persons, FileWork.Options());     //сериализация, где exmp - список <List>, options настройки
+                FileWork.WriteText(FileWork.GetPath(), jsonString);          //@"content.json" - файл; jsonstring - строка, которую надо записать
+                MainWindow window = new MainWindow();
+                window.Show();
                 this.Close();
         }
         private void Exit_Key(object sender, EventArgs e)

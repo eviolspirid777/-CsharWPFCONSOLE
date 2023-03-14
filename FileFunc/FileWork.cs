@@ -11,6 +11,7 @@ namespace FileFunc
 {
     public class FileWork
     {
+        public static string GetPath() => Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "content.json");
         static public StreamWriter CreateFile(string path)
         {
             StreamWriter sw = new StreamWriter(path);
@@ -21,7 +22,7 @@ namespace FileFunc
             FileInfo sw = new FileInfo(path);
             if (sw.Exists) return true; else return false;
         }
-        static public void WriteTxt(string path, string txt)
+        static public void WriteText(string path, string txt)
         {
             File.WriteAllText(path, txt);
         }

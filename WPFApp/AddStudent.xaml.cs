@@ -18,12 +18,12 @@ using System.Security.Cryptography;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using PrsnLib;
+using FileFunc;
 
 namespace csSharpJWPF
 {
     public partial class Window2 : Window
     {
-        static string Path = @"content.json";
         Person person = new Person();
 
         public Window2()
@@ -33,12 +33,8 @@ namespace csSharpJWPF
 
         private void Key_Down(object sender, RoutedEventArgs e)
         {
-            var options = new JsonSerializerOptions
-            {
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),       //настройки для сериалайзера
-                WriteIndented = true
-            };
-                List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()), options);
+
+                List<Person> humans = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathContent.GetPath()), FileWork.Options());
                 person.Fio.Surname = Surname.Text;
                 person.Fio.Name = Name.Text; 
                 person.Fio.Patron = Patron.Text; 
@@ -52,8 +48,8 @@ namespace csSharpJWPF
                 person.Contacts.Phone = Phone.Text; 
                 person.Contacts.Mail = Mail.Text; 
                 humans.Add(person);
-                string jsonString = JsonSerializer.Serialize(humans, options);     //сериализация, где exmp - список <List>, options настройки
-                File.WriteAllText(PathContent.GetPath(), jsonString);                 //@"content.json" - файл; jsonstring - строка, которую надо записать
+                string jsonString = JsonSerializer.Serialize(humans, FileWork.Options());     //сериализация, где exmp - список <List>, options настройки
+                FileWork.WriteTxt(PathContent.GetPath(), jsonString);          //@"content.json" - файл; jsonstring - строка, которую надо записать
                 MainWindow wndo = new MainWindow();
                 wndo.Show();
                 this.Close();

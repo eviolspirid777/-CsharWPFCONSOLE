@@ -86,5 +86,27 @@
       "Phone": "8110882341",
       "Mail": "angelinajouli@icloud.com"
     }
+  },
+  {
+    "Fio": {
+      "Surname": "Васильев",
+      "Name": "Бред",
+      "Patron": "Петрович"
+    },
+    "Curriculum": {
+      "Faculty": "imit",
+      "Specialty": "mathematic",
+      "Course": "5",
+      "Group": "pmi-102-20-1-12"
+    },
+    "Address": {
+      "City": "Абу-Даби",
+      "PstIndex": "222304",
+      "Street": "Ленина"
+    },
+    "Contacts": {
+      "Phone": "89091123242",
+      "Mail": "bredvasilev@iclod.com"
+    }
   }
 ]

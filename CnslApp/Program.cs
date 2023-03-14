@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 using System.Security.Cryptography;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 using PrsnLib;
+using FileFunc;
+using System.Diagnostics.Metrics;
 
 //string Path = @"content.json";
 
 internal class Program
 {
     static int TableWidth = 200; //размер таблицы
-
     static void PrintLine()
     {
         Console.WriteLine(new string('-', TableWidth));
@@ -123,7 +125,6 @@ internal class Program
         string jsonString = JsonSerializer.Serialize(exmp, FileWork.Options());
         FileWork.WriteTxt(PathContent.GetPath(), jsonString);
     }
-
     static void FillExmp(ref Person temper)
     {
         Console.WriteLine("Введите ФИО:\n Имя");
@@ -152,7 +153,21 @@ internal class Program
         temper.Curriculum.Specialty = Console.ReadLine();
         Console.Clear();
     }
-    static int ExmpMenu(List<Person> example)
+    static void ExmpMenu(List<Person> example, out int counter)
+    {
+        counter = 1;
+        Console.Clear();
+        PrintLine();
+        PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
+        PrintLine();
+        foreach (var item in example)
+        {
+            PrintRow($"{counter}", $"{item.Fio.Name}", $"{item.Fio.Surname}", $"{item.Fio.Patron}", $"{item.Address.City}", $"{item.Address.PstIndex}", $"{item.Address.Street}", $"{item.Contacts.Mail}", $"{item.Contacts.Phone}", $"{item.Curriculum.Course}", $"{item.Curriculum.Faculty}", $"{item.Curriculum.Group}", $"{item.Curriculum.Specialty}");
+            counter++;
+        }
+        PrintLine();
+    }
+    static void ExmpMenu(List<Person> example)
     {
         int counter = 1;
         Console.Clear();
@@ -165,7 +180,6 @@ internal class Program
             counter++;
         }
         PrintLine();
-        return counter;
     }
     static void ListMenu()
     {
@@ -173,7 +187,7 @@ internal class Program
         {
             string jsonString = File.ReadAllText(PathContent.GetPath());
             List<Person> exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!; //ПРЕДСТАВИТЬ ВВИДЕ МАССИВА И ОТРАБОТАТЬ КАЖДЫЙ ЭЛЕМЕНТ ЧЕРЕЗ ЦИКЛ
-            int counter = ExmpMenu(exp);
+            ExmpMenu(exp, out int counter);
             Console.WriteLine();
             EditNode(counter, ref exp);
             Console.Clear();
@@ -240,10 +254,16 @@ internal class Program
         );
         if (filteredList.Count() > 0)
         {
+            int counter = 1;
+            PrintLine();
+            PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
+            PrintLine();
             foreach (var person in filteredList)
             {
-                Console.WriteLine(person.GetInfo());
+                PrintRow($"{counter}", $"{person.Fio.Name}", $"{person.Fio.Surname}", $"{person.Fio.Patron}", $"{person.Address.City}", $"{person.Address.PstIndex}", $"{person.Address.Street}", $"{person.Contacts.Mail}", $"{person.Contacts.Phone}", $"{person.Curriculum.Course}", $"{person.Curriculum.Faculty}", $"{person.Curriculum.Group}", $"{person.Curriculum.Specialty}");
+                counter++;
             }
+            PrintLine();
         }
         else
         {
@@ -254,7 +274,6 @@ internal class Program
         Console.Clear();
         PrintMenu();
     }
-
     static void PrintMenu()
     {
         Console.Write("Введите:\n1.Получить список (изменить запись)\n2.Добавить запись\n3.Соритровать\n4.Фильтровать\n5.Выйти\n");

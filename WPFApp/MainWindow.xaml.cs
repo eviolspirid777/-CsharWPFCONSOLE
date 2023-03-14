@@ -35,6 +35,7 @@ namespace csSharpJWPF
         {
             Window2 wnd = new Window2();
             wnd.Show();
+            this.Close();
         }
         public void Mouse_click_Filt(object e, RoutedEventArgs arg)
         {

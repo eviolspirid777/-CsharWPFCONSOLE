@@ -64,5 +64,27 @@
       "Phone": "89001202203",
       "Mail": "sergmiheev@gmail.com"
     }
+  },
+  {
+    "Fio": {
+      "Surname": "Джоули",
+      "Name": "Анджелина",
+      "Patron": "Васильевна"
+    },
+    "Curriculum": {
+      "Faculty": "Творческий",
+      "Specialty": "Креативная",
+      "Course": "5",
+      "Group": "твк-30-20-11-1"
+    },
+    "Address": {
+      "City": "Беверли-Хилз",
+      "PstIndex": "552001",
+      "Street": "им.Гослинга"
+    },
+    "Contacts": {
+      "Phone": "8110882341",
+      "Mail": "angelinajouli@icloud.com"
+    }
   }
 ]

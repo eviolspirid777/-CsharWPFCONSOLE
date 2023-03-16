@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FileFunc\FileFunc.csproj" />
     <ProjectReference Include="..\PrsnLib\PrsnLib.csproj" />
+    <ProjectReference Include="..\Table\TableFunc.csproj" />
   </ItemGroup>
 
 </Project>

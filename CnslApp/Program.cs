@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using PrsnLib;
 using FileFunc;
-
+using TableFunc;
 //string Path = @"content.json";
 
 internal class Program

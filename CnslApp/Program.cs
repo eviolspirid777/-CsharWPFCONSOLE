@@ -20,16 +20,22 @@ internal class Program
 
     static void EditNode(int count, List<Person> persons)
     {
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine("\nВы хотите изменить запись?(y/n)");
+        Console.ResetColor();
         var sw = Console.ReadLine();
         if (sw == "y")
         {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Введите номер записи, которую хотите изменить:");
+            Console.ResetColor();
             string? num = Console.ReadLine();
             if (int.TryParse(num, out int number) && number <= persons.Count)
             {
                 number--;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Что вы хотите изменить:\n1)ФИО\n2)Город\n3)Почтовый индекс\n4)Улицу\n5)Почту\n6)Телефон\n7)Факультет\n8)Курс\n9)Группу\n10)Специальность\n");
+                Console.ResetColor();
                 string t = Console.ReadLine();
                 switch (t)
                 {
@@ -66,7 +72,9 @@ internal class Program
                         persons[number].Curriculum.Specialty = EnterResult("Специальность");
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine("Введен неправильный символ!");
+                        Console.ResetColor();
                         Console.ReadKey();
                         EditNode(count, persons);
                         break;
@@ -74,14 +82,18 @@ internal class Program
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Вы вышли за пределы записей!");
+                Console.ResetColor();
                 Thread.Sleep(1200);
                 ListMenu();
             }
         }
         if (sw != "y" && sw != "n")
         {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Вы ввели неправильный символ!");
+            Console.ResetColor();
             Thread.Sleep(1000);
             EditNode(count, persons);
         }
@@ -128,7 +140,7 @@ internal class Program
         }
         Table.PrintLine();
     }
-    static void ExmpMenu(List<Person> example)
+    static void PrintPersonTable(List<Person> example)
     {
         int counter = 1;
         Console.Clear();
@@ -158,7 +170,9 @@ internal class Program
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Не могу найти файл! Создаю новый...");
+            Console.ResetColor();
             FileWork.CreateFile(FileWork.GetPath());
             Thread.Sleep(1000);
             ListMenu();
@@ -170,8 +184,7 @@ internal class Program
         if (FileWork.Exist(FileWork.GetPath()))
         {
             var persons = new List<Person>();
-            string flag = "";
-            flag = File.ReadAllText(FileWork.GetPath()).Trim();
+            string flag = File.ReadAllText(FileWork.GetPath()).Trim();
             if (flag != "")
             {
                 persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
@@ -186,14 +199,18 @@ internal class Program
             PrintMenu();
         }
         else
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Не могу найти файл!");
+            Console.ResetColor();
+        }
     }
 
     static void Sort()
     {
         var person = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
         person.Sort((p1, p2) => p1.Fio.Name.CompareTo(p2.Fio.Name));
-        ExmpMenu(person);
+        PrintPersonTable(person);
         Console.ReadKey();
         Console.Clear();
         PrintMenu();
@@ -201,7 +218,9 @@ internal class Program
     static void Filt()
     {
         List<Person> persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine("Введите ключевое слово:");
+        Console.ResetColor();
         var sw = Console.ReadLine();
         Console.Clear();
         var filteredList = persons.Where(person =>
@@ -230,16 +249,22 @@ internal class Program
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Не нашел записей..!");
+            Console.ResetColor();
         }
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine("\n\nНажмите любую клавишу...");
+        Console.ResetColor();
         Console.ReadKey();
         Console.Clear();
         PrintMenu();
     }
     static void PrintMenu()
     {
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.Write("Введите:\n1.Получить список (изменить запись)\n2.Добавить запись\n3.Соритровать\n4.Фильтровать\n5.Выйти\n");
+        Console.ResetColor();
         var ch = Convert.ToChar(Console.ReadLine());
         Console.Clear();
         switch (ch)
@@ -266,7 +291,9 @@ internal class Program
                 }
             case '5':
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("Удачи!");
+                    Console.ResetColor();
                     Thread.Sleep(1200);
                     Console.Clear();
                     System.Environment.Exit(0);
@@ -274,7 +301,9 @@ internal class Program
                 }
             default:
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("Ошибка! Не могу получить символ!");
+                    Console.ResetColor();
                     Thread.Sleep(500);
                     Console.Clear();
                     PrintMenu();

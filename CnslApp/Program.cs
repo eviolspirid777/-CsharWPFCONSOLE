@@ -1,52 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Runtime.ExceptionServices;
-using System.Security.Cryptography;
-using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Text.Unicode;
+﻿using System.Text.Json;
 using PrsnLib;
 using FileFunc;
-using System.Diagnostics.Metrics;
 
 //string Path = @"content.json";
 
 internal class Program
 {
+    delegate void Operator();
     static int TableWidth = 200; //размер таблицы
-    static void PrintLine()
-    {
-        Console.WriteLine(new string('-', TableWidth));
-    }
+    
 
-    static void PrintRow(params string[] columns)
-    {
-        int width = (TableWidth - columns.Length) / columns.Length;
-        string row = "|";
-        foreach (string column in columns)
-        {
-            row += AlignCentre(column, width) + "|";
-        }
-        Console.WriteLine(row);
-    }
-
-    static string AlignCentre(string text, int width)
-    {
-        text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
-        if (string.IsNullOrEmpty(text))
-        {
-            return new string(' ', width);
-        }
-        else
-        {
-            return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
-        }
-    }
-
-    static string EnterRes(string add)
+    static string EnterResult(string add)
     {
         Console.WriteLine($"Введите {add}:\n");
         string text = Console.ReadLine();
@@ -54,16 +18,15 @@ internal class Program
     }
 
 
-    static void EditNode(int count, ref List<Person> exmp)
+    static void EditNode(int count, ref List<Person> people)
     {
-        
         Console.WriteLine("\nВы хотите изменить запись?(y/n)");
         var sw = Console.ReadLine();
         if (sw == "y")
         {
             Console.WriteLine("Введите номер записи, которую хотите изменить:");
             string? num = Console.ReadLine();
-            if (int.TryParse(num, out int number) && number <= exmp.Capacity)
+            if (int.TryParse(num, out int number) && number <= people.Count)
             {
                 number--;
                 Console.WriteLine("Что вы хотите изменить:\n1)ФИО\n2)Город\n3)Почтовый индекс\n4)Улицу\n5)Почту\n6)Телефон\n7)Факультет\n8)Курс\n9)Группу\n10)Специальность\n");
@@ -71,41 +34,41 @@ internal class Program
                 switch (t)
                 {
                     case "1":
-                        exmp[number].Fio.Surname = EnterRes("Фамилия");
-                        exmp[number].Fio.Name = EnterRes("Имя");
-                        exmp[number].Fio.Patron = EnterRes("Отчество");
+                        people[number].Fio.Surname = EnterResult("Фамилия");
+                        people[number].Fio.Name = EnterResult("Имя");
+                        people[number].Fio.Patron = EnterResult("Отчество");
                         break;
                     case "2":
-                        exmp[number].Address.City = EnterRes("Город");
+                        people[number].Address.City = EnterResult("Город");
                         break;
                     case "3":
-                        exmp[number].Address.PstIndex = EnterRes("Почтовый индекс");
+                        people[number].Address.PstIndex = EnterResult("Почтовый индекс");
                         break;
                     case "4":
-                        exmp[number].Address.Street = EnterRes("Улица");
+                        people[number].Address.Street = EnterResult("Улица");
                         break;
                     case "5":
-                        exmp[number].Contacts.Mail = EnterRes("Почта");
+                        people[number].Contacts.Mail = EnterResult("Почта");
                         break;
                     case "6":
-                        exmp[number].Contacts.Phone = EnterRes("Телефон");
+                        people[number].Contacts.Phone = EnterResult("Телефон");
                         break;
                     case "7":
-                        exmp[number].Curriculum.Faculty = EnterRes("Факультет");
+                        people[number].Curriculum.Faculty = EnterResult("Факультет");
                         break;
                     case "8":
-                        exmp[number].Curriculum.Course = EnterRes("Курс");
+                        people[number].Curriculum.Course = EnterResult("Курс");
                         break;
                     case "9":
-                        exmp[number].Curriculum.Group = EnterRes("Группа");
+                        people[number].Curriculum.Group = EnterResult("Группа");
                         break;
                     case "10":
-                        exmp[number].Curriculum.Specialty = EnterRes("Специальность");
+                        people[number].Curriculum.Specialty = EnterResult("Специальность");
                         break;
                     default:
                         Console.WriteLine("Введен неправильный символ!");
                         Console.ReadKey();
-                        EditNode(count, ref exmp);
+                        EditNode(count, ref people);
                         break;
                 }
             }
@@ -120,10 +83,8 @@ internal class Program
         {
             Console.WriteLine("Вы ввели неправильный символ!");
             Thread.Sleep(1000);
-            EditNode(count, ref exmp);
+            EditNode(count, ref people);
         }
-        string jsonString = JsonSerializer.Serialize(exmp, FileWork.Options());
-        FileWork.WriteText(FileWork.GetPath(), jsonString);
     }
     static void FillExmp(ref Person temper)
     {
@@ -157,39 +118,41 @@ internal class Program
     {
         counter = 1;
         Console.Clear();
-        PrintLine();
-        PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
-        PrintLine();
+        Table.PrintLine();
+        Table.PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
+        Table.PrintLine();
         foreach (var item in example)
         {
-            PrintRow($"{counter}", $"{item.Fio.Name}", $"{item.Fio.Surname}", $"{item.Fio.Patron}", $"{item.Address.City}", $"{item.Address.PstIndex}", $"{item.Address.Street}", $"{item.Contacts.Mail}", $"{item.Contacts.Phone}", $"{item.Curriculum.Course}", $"{item.Curriculum.Faculty}", $"{item.Curriculum.Group}", $"{item.Curriculum.Specialty}");
+            Table.PrintRow($"{counter}", $"{item.Fio.Name}", $"{item.Fio.Surname}", $"{item.Fio.Patron}", $"{item.Address.City}", $"{item.Address.PstIndex}", $"{item.Address.Street}", $"{item.Contacts.Mail}", $"{item.Contacts.Phone}", $"{item.Curriculum.Course}", $"{item.Curriculum.Faculty}", $"{item.Curriculum.Group}", $"{item.Curriculum.Specialty}");
             counter++;
         }
-        PrintLine();
+        Table.PrintLine();
     }
     static void ExmpMenu(List<Person> example)
     {
         int counter = 1;
         Console.Clear();
-        PrintLine();
-        PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
-        PrintLine();
+        Table.PrintLine();
+        Table.PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
+        Table.PrintLine();
         foreach (var item in example)
         {
-            PrintRow($"{counter}", $"{item.Fio.Name}", $"{item.Fio.Surname}", $"{item.Fio.Patron}", $"{item.Address.City}", $"{item.Address.PstIndex}", $"{item.Address.Street}", $"{item.Contacts.Mail}", $"{item.Contacts.Phone}", $"{item.Curriculum.Course}", $"{item.Curriculum.Faculty}", $"{item.Curriculum.Group}", $"{item.Curriculum.Specialty}");
+            Table.PrintRow($"{counter}", $"{item.Fio.Name}", $"{item.Fio.Surname}", $"{item.Fio.Patron}", $"{item.Address.City}", $"{item.Address.PstIndex}", $"{item.Address.Street}", $"{item.Contacts.Mail}", $"{item.Contacts.Phone}", $"{item.Curriculum.Course}", $"{item.Curriculum.Faculty}", $"{item.Curriculum.Group}", $"{item.Curriculum.Specialty}");
             counter++;
         }
-        PrintLine();
+        Table.PrintLine();
     }
     static void ListMenu()
     {
         if (FileWork.Exist(FileWork.GetPath()))
         {
-            string jsonString = File.ReadAllText(FileWork.GetPath());
-            List<Person> exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!; //ПРЕДСТАВИТЬ ВВИДЕ МАССИВА И ОТРАБОТАТЬ КАЖДЫЙ ЭЛЕМЕНТ ЧЕРЕЗ ЦИКЛ
+            var jsonString = File.ReadAllText(FileWork.GetPath());
+            var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!; //ПРЕДСТАВИТЬ ВВИДЕ МАССИВА И ОТРАБОТАТЬ КАЖДЫЙ ЭЛЕМЕНТ ЧЕРЕЗ ЦИКЛ
             ExmpMenu(exp, out int counter);
             Console.WriteLine();
             EditNode(counter, ref exp);
+            jsonString = JsonSerializer.Serialize(exp, FileWork.Options());
+            FileWork.WriteText(FileWork.GetPath(), jsonString);
             Console.Clear();
             PrintMenu();
         }
@@ -228,7 +191,7 @@ internal class Program
 
     static void Sort()
     {
-        List<Person> person = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
+        var person = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
         person.Sort((p1, p2) => p1.Fio.Name.CompareTo(p2.Fio.Name));
         ExmpMenu(person);
         Console.ReadKey();
@@ -239,7 +202,7 @@ internal class Program
     {
         List<Person> persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
         Console.WriteLine("Введите ключевое слово:");
-        string sw = Console.ReadLine();
+        var sw = Console.ReadLine();
         Console.Clear();
         var filteredList = persons.Where(person =>
             person.Fio.Surname.Contains(sw) ||
@@ -255,15 +218,15 @@ internal class Program
         if (filteredList.Count() > 0)
         {
             int counter = 1;
-            PrintLine();
-            PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
-            PrintLine();
+            Table.PrintLine();
+            Table.PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
+            Table.PrintLine();
             foreach (var person in filteredList)
             {
-                PrintRow($"{counter}", $"{person.Fio.Name}", $"{person.Fio.Surname}", $"{person.Fio.Patron}", $"{person.Address.City}", $"{person.Address.PstIndex}", $"{person.Address.Street}", $"{person.Contacts.Mail}", $"{person.Contacts.Phone}", $"{person.Curriculum.Course}", $"{person.Curriculum.Faculty}", $"{person.Curriculum.Group}", $"{person.Curriculum.Specialty}");
+                Table.PrintRow($"{counter}", $"{person.Fio.Name}", $"{person.Fio.Surname}", $"{person.Fio.Patron}", $"{person.Address.City}", $"{person.Address.PstIndex}", $"{person.Address.Street}", $"{person.Contacts.Mail}", $"{person.Contacts.Phone}", $"{person.Curriculum.Course}", $"{person.Curriculum.Faculty}", $"{person.Curriculum.Group}", $"{person.Curriculum.Specialty}");
                 counter++;
             }
-            PrintLine();
+            Table.PrintLine();
         }
         else
         {
@@ -277,7 +240,7 @@ internal class Program
     static void PrintMenu()
     {
         Console.Write("Введите:\n1.Получить список (изменить запись)\n2.Добавить запись\n3.Соритровать\n4.Фильтровать\n5.Выйти\n");
-        char ch = Convert.ToChar(Console.ReadLine());
+        var ch = Convert.ToChar(Console.ReadLine());
         Console.Clear();
         switch (ch)
         {

@@ -217,7 +217,7 @@ internal class Program
     }
     static void Filt()
     {
-        List<Person> persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
+        var persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine("Введите ключевое слово:");
         Console.ResetColor();

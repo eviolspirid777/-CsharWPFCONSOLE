@@ -12,19 +12,19 @@ namespace FileFunc
     public class FileWork
     {
         public static string GetPath() => Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "content.json");
-        static public StreamWriter CreateFile(string path)
+        static public StreamWriter CreateFile()
         {
-            StreamWriter sw = new StreamWriter(path);
+            StreamWriter sw = new StreamWriter(GetPath());
             return sw; 
         }
-        static public bool Exist(string path)
+        static public bool Exist()
         {
-            FileInfo sw = new FileInfo(path);
+            FileInfo sw = new FileInfo(GetPath());
             if (sw.Exists) return true; else return false;
         }
-        static public void WriteText(string path, string txt)
+        static public void WriteText( string txt)
         {
-            File.WriteAllText(path, txt);
+            File.WriteAllText(GetPath(), txt);
         }
         static public JsonSerializerOptions Options()
         {

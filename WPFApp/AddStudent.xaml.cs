@@ -49,7 +49,7 @@ namespace csSharpJWPF
                 person.Contacts.Mail = Mail.Text; 
                 persons.Add(person);
                 string jsonString = JsonSerializer.Serialize(persons, FileWork.Options());     //сериализация, где exmp - список <List>, options настройки
-                FileWork.WriteText(FileWork.GetPath(), jsonString);          //@"content.json" - файл; jsonstring - строка, которую надо записать
+                FileWork.WriteText(jsonString);          //@"content.json" - файл; jsonstring - строка, которую надо записать
                 MainWindow window = new MainWindow();
                 window.Show();
                 this.Close();

@@ -28,8 +28,7 @@ namespace csSharpJWPF
         public MainWindow()
         {
             InitializeComponent();
-            var options = new JsonSerializerOptions { Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic), WriteIndented = true };
-            List<Person> Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()), options);
+            var Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()), FileWork.Options());
             MyGrid.ItemsSource = Persons;
         }
         public void Mouse_click(object e, RoutedEventArgs arg)
@@ -41,7 +40,7 @@ namespace csSharpJWPF
         public void Mouse_click_Filt(object e, RoutedEventArgs arg)
         {
             string jsonString = File.ReadAllText(FileWork.GetPath());
-            List<Person> Persons = JsonSerializer.Deserialize<List<Person>>(jsonString, FileWork.Options());
+            var Persons = JsonSerializer.Deserialize<List<Person>>(jsonString, FileWork.Options());
             MyGrid.ItemsSource = Persons.Where(Persons => 
             Persons.Fio.Name.ToLower().Contains(keyword.Text)
             || Persons.Fio.Surname.ToLower().Contains(keyword.Text)
@@ -56,7 +55,7 @@ namespace csSharpJWPF
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            List<Person> persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()), FileWork.Options());
+            var persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()), FileWork.Options());
             MyGrid.ItemsSource = persons;
         }
     }

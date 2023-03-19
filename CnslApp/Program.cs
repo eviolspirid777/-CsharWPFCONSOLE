@@ -6,18 +6,13 @@ using CnslApp;
 
 internal class Program
 {
-    delegate void Operator();
     static int TableWidth = 200; //размер таблицы
-    
-
     static string EnterResult(string add)
     {
         Console.WriteLine($"Введите {add}:\n");
         string text = Console.ReadLine();
         return text;
     }
-
-
     static void EditNode(int count, List<Person> persons)
     {
         Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -156,7 +151,7 @@ internal class Program
     }
     static void ListMenu()
     {
-        if (FileWork.Exist(FileWork.GetPath()))
+        if (FileWork.Exist())
         {
             var jsonString = File.ReadAllText(FileWork.GetPath());
             var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!; //ПРЕДСТАВИТЬ ВВИДЕ МАССИВА И ОТРАБОТАТЬ КАЖДЫЙ ЭЛЕМЕНТ ЧЕРЕЗ ЦИКЛ
@@ -164,7 +159,7 @@ internal class Program
             Console.WriteLine();
             EditNode(counter, exp);
             jsonString = JsonSerializer.Serialize(exp, FileWork.Options());
-            FileWork.WriteText(FileWork.GetPath(), jsonString);
+            FileWork.WriteText( jsonString);
             Console.Clear();
             PrintMenu();
         }
@@ -173,15 +168,14 @@ internal class Program
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Не могу найти файл! Создаю новый...");
             Console.ResetColor();
-            FileWork.CreateFile(FileWork.GetPath());
+            FileWork.CreateFile();
             Thread.Sleep(1000);
             ListMenu();
         }
     }
-
     static void AddNode()
     {
-        if (FileWork.Exist(FileWork.GetPath()))
+        if (FileWork.Exist())
         {
             var persons = new List<Person>();
             string flag = File.ReadAllText(FileWork.GetPath()).Trim();
@@ -205,7 +199,6 @@ internal class Program
             Console.ResetColor();
         }
     }
-
     static void Sort()
     {
         var person = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));

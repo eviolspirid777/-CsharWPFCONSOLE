@@ -39,7 +39,7 @@ namespace csSharpJWPF
         }
         public void Mouse_click_Filt(object e, RoutedEventArgs arg)
         {
-            string jsonString = File.ReadAllText(FileWork.PathTo);
+            string jsonString = FileWork.ReadText();
             var Persons = JsonSerializer.Deserialize<List<Person>>(jsonString, FileWork.Options());
             MyGrid.ItemsSource = Persons.Where(Persons => 
             Persons.Fio.Name.ToLower().Contains(keyword.Text)
@@ -55,7 +55,7 @@ namespace csSharpJWPF
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            var persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.PathTo), FileWork.Options());
+            var persons = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText(), FileWork.Options());
             MyGrid.ItemsSource = persons;
         }
     }

@@ -17,6 +17,7 @@ namespace FileFunction
             StreamWriter sw = new StreamWriter(PathTo);
             return sw; 
         }
+        static public string ReadText() => File.ReadAllText(PathTo);
         static public bool Exist()
         {
             FileInfo sw = new FileInfo(PathTo);

@@ -23,7 +23,7 @@ internal class Program
         string text = Console.ReadLine();
         return text;
     }
-    static void EditNode(int count, List<Person> persons)
+    static void EditNode(List<Person> persons)
     {
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine("\nВы хотите изменить запись?(y/n)");
@@ -81,7 +81,7 @@ internal class Program
                         Console.WriteLine("Введен неправильный символ!");
                         Console.ResetColor();
                         Console.ReadKey();
-                        EditNode(count, persons);
+                        EditNode(persons);
                         break;
                 }
             }
@@ -100,40 +100,53 @@ internal class Program
             Console.WriteLine("Вы ввели неправильный символ!");
             Console.ResetColor();
             Thread.Sleep(1000);
-            EditNode(count, persons);
+            EditNode(persons);
         }
     }
-    static void FillExmp(Person temper)
+    static void FillExmp()
     {
-        Console.WriteLine("Введите ФИО:\n Имя");
-        temper.Fio.Name = Console.ReadLine();
-        Console.WriteLine(" Фамилия:");
-        temper.Fio.Surname = Console.ReadLine();
-        Console.WriteLine(" Отчество:");
-        temper.Fio.Patron = Console.ReadLine();
-        Console.WriteLine("Введите город:");
-        temper.Address.City = Console.ReadLine();
-        Console.WriteLine("Введите почтовый индекс:");
-        temper.Address.PstIndex = Console.ReadLine();
-        Console.WriteLine("Введите улицу:");
-        temper.Address.Street = Console.ReadLine();
-        Console.WriteLine("Введите почту:");
-        temper.Contacts.Mail = Console.ReadLine();
-        Console.WriteLine("Введите телефон:");
-        temper.Contacts.Phone = Console.ReadLine();
-        Console.WriteLine("Введите факультет:");
-        temper.Curriculum.Faculty = Console.ReadLine();
-        Console.WriteLine("Введите курс:");
-        temper.Curriculum.Course = Console.ReadLine();
-        Console.WriteLine("Введите группу:");
-        temper.Curriculum.Group = Console.ReadLine();
-        Console.WriteLine("Введите специальность:");
-        temper.Curriculum.Specialty = Console.ReadLine();
-        Console.Clear();
+        string flag = FileWork.ReadText().Trim();
+        if (flag != "")
+        {
+            Person temper = new Person();
+            var exp = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText())!;
+            Console.WriteLine("Введите ФИО:\n Имя");
+            temper.Fio.Name = Console.ReadLine();
+            Console.WriteLine(" Фамилия:");
+            temper.Fio.Surname = Console.ReadLine();
+            Console.WriteLine(" Отчество:");
+            temper.Fio.Patron = Console.ReadLine();
+            Console.WriteLine("Введите город:");
+            temper.Address.City = Console.ReadLine();
+            Console.WriteLine("Введите почтовый индекс:");
+            temper.Address.PstIndex = Console.ReadLine();
+            Console.WriteLine("Введите улицу:");
+            temper.Address.Street = Console.ReadLine();
+            Console.WriteLine("Введите почту:");
+            temper.Contacts.Mail = Console.ReadLine();
+            Console.WriteLine("Введите телефон:");
+            temper.Contacts.Phone = Console.ReadLine();
+            Console.WriteLine("Введите факультет:");
+            temper.Curriculum.Faculty = Console.ReadLine();
+            Console.WriteLine("Введите курс:");
+            temper.Curriculum.Course = Console.ReadLine();
+            Console.WriteLine("Введите группу:");
+            temper.Curriculum.Group = Console.ReadLine();
+            Console.WriteLine("Введите специальность:");
+            temper.Curriculum.Specialty = Console.ReadLine();
+            Console.Clear();
+            exp.Add(temper);
+            string jsonString = JsonSerializer.Serialize(exp, FileWork.Options());
+            FileWork.WriteText(jsonString);
+        }
+        else
+        {
+            Console.WriteLine("Файл пуст!");
+        }
     }
-    static void ExmpMenu(List<Person> example, out int counter)
+    static void ExmpMenu(List<Person> example)
     {
-        counter = 1;
+        int counter = 1;
         Console.Clear();
         Table.PrintLine();
         Table.PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
@@ -165,9 +178,9 @@ internal class Program
         {
             var jsonString = FileWork.ReadText();
             var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!; //ПРЕДСТАВИТЬ ВВИДЕ МАССИВА И ОТРАБОТАТЬ КАЖДЫЙ ЭЛЕМЕНТ ЧЕРЕЗ ЦИКЛ
-            ExmpMenu(exp, out int counter);
+            ExmpMenu(exp);
             Console.WriteLine();
-            EditNode(counter, exp);
+            EditNode(exp);
             jsonString = JsonSerializer.Serialize(exp, FileWork.Options());
             FileWork.WriteText( jsonString);
             Console.Clear();
@@ -187,18 +200,7 @@ internal class Program
     {
         if (FileWork.Exist())
         {
-            var persons = new List<Person>();
-            string flag = FileWork.ReadText().Trim();
-            if (flag != "")
-            {
-                persons = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText());
-            }
-            Person temp = new();
-            FillExmp(temp);
-            Console.Clear();
-            persons.Add(temp);
-            string jsonString = JsonSerializer.Serialize(persons, FileWork.Options());
-            FileWork.WriteText(jsonString);
+            FillExmp();
             Console.Clear();
             PrintMenu();
         }

@@ -90,8 +90,8 @@
   {
     "Fio": {
       "Surname": "Васильев",
-      "Name": "Бред",
-      "Patron": "Петрович"
+      "Name": "Брэд",
+      "Patron": "Пит"
     },
     "Curriculum": {
       "Faculty": "imit",
@@ -107,6 +107,28 @@
     "Contacts": {
       "Phone": "89091123242",
       "Mail": "bredvasilev@iclod.com"
+    }
+  },
+  {
+    "Fio": {
+      "Surname": "Маренкова",
+      "Name": "Василиса",
+      "Patron": "Штец"
+    },
+    "Curriculum": {
+      "Faculty": "под",
+      "Specialty": "Педагог",
+      "Course": "1",
+      "Group": "под-201-20-13-1"
+    },
+    "Address": {
+      "City": "Саратов",
+      "PstIndex": "322011",
+      "Street": "ул.Ленина"
+    },
+    "Contacts": {
+      "Phone": "89091123123",
+      "Mail": "marenkova.vas@qip.ru"
     }
   }
 ]

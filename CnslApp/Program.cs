@@ -163,7 +163,7 @@ internal class Program
     {
         if (FileWork.Exist())
         {
-            var jsonString = File.ReadAllText(FileWork.PathTo);
+            var jsonString = FileWork.ReadText();
             var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!; //ПРЕДСТАВИТЬ ВВИДЕ МАССИВА И ОТРАБОТАТЬ КАЖДЫЙ ЭЛЕМЕНТ ЧЕРЕЗ ЦИКЛ
             ExmpMenu(exp, out int counter);
             Console.WriteLine();
@@ -188,17 +188,17 @@ internal class Program
         if (FileWork.Exist())
         {
             var persons = new List<Person>();
-            string flag = File.ReadAllText(FileWork.PathTo).Trim();
+            string flag = FileWork.ReadText().Trim();
             if (flag != "")
             {
-                persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.PathTo));
+                persons = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText());
             }
             Person temp = new();
             FillExmp(temp);
             Console.Clear();
             persons.Add(temp);
             string jsonString = JsonSerializer.Serialize(persons, FileWork.Options());
-            File.WriteAllText(FileWork.PathTo, jsonString);
+            FileWork.WriteText(jsonString);
             Console.Clear();
             PrintMenu();
         }
@@ -211,7 +211,7 @@ internal class Program
     }
     static void Sort()
     {
-        var person = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.PathTo));
+        var person = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText());
         person.Sort((p1, p2) => p1.Fio.Name.CompareTo(p2.Fio.Name));
         PrintPersonTable(person);
         Console.ReadKey();
@@ -220,7 +220,7 @@ internal class Program
     }
     static void Filt()
     {
-        var persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.PathTo));
+        var persons = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText());
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine("Введите ключевое слово:");
         Console.ResetColor();

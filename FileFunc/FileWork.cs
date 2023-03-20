@@ -11,7 +11,7 @@ namespace FileFunction
 {
     public class FileWork
     {
-        public static string PathTo = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "content.json");
+        static string PathTo = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "content.json");
         static public StreamWriter CreateFile()
         {
             StreamWriter sw = new StreamWriter(PathTo);

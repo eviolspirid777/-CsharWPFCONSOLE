@@ -177,7 +177,7 @@ internal class Program
         if (FileWork.Exist())
         {
             var jsonString = FileWork.ReadText();
-            var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!; //ПРЕДСТАВИТЬ ВВИДЕ МАССИВА И ОТРАБОТАТЬ КАЖДЫЙ ЭЛЕМЕНТ ЧЕРЕЗ ЦИКЛ
+            var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!;
             ExmpMenu(exp);
             Console.WriteLine();
             EditNode(exp);
@@ -219,6 +219,42 @@ internal class Program
         Console.ReadKey();
         Console.Clear();
         PrintMenu();
+    }
+    static void DeleteNode()
+    {
+        if (FileWork.Exist())
+        {
+            var jsonString = FileWork.ReadText();
+            var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!;
+            ExmpMenu(exp);
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("\n\nВведите номер записи, которую вы хотите удалить");
+            Console.ResetColor();
+            string num = Console.ReadLine();
+            if(int.TryParse(num, out int number))
+            {
+                Console.Clear();
+                exp.RemoveAll(x => exp.IndexOf(x) == number - 1);
+                jsonString = JsonSerializer.Serialize(exp, FileWork.Options());
+                FileWork.WriteText(jsonString);
+                PrintMenu();
+            }
+            else
+            {
+                Console.WriteLine("Вы ввели не число!");
+                Console.Clear();
+                DeleteNode();
+            }
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("Файл не существует!");
+            Console.ResetColor();
+            FileWork.CreateFile();
+            Thread.Sleep(1000);
+            PrintMenu();
+        }
     }
     static void Filt()
     {
@@ -268,7 +304,7 @@ internal class Program
     static void PrintMenu()
     {
         Console.ForegroundColor = ConsoleColor.DarkYellow;
-        Console.Write("Введите:\n1.Получить список (изменить запись)\n2.Добавить запись\n3.Соритровать\n4.Фильтровать\n5.Выйти\n");
+        Console.Write("Введите:\n1.Получить список (изменить запись)\n2.Добавить запись\n3.Удалить запись\n4.Сортировать\n5.Фильтровать\n6.Выйти\n");
         Console.ResetColor();
         var ch = Convert.ToChar(Console.ReadLine());
         Console.Clear();
@@ -286,15 +322,20 @@ internal class Program
                 }
             case '3':
                 {
-                    Sort();
+                    DeleteNode();
                     break;
                 }
             case '4':
                 {
-                    Filt();
+                    Sort();
                     break;
                 }
             case '5':
+                {
+                    Filt();
+                    break;
+                }
+            case '6':
                 {
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("Удачи!");

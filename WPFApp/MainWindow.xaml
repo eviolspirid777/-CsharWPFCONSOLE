@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:csSharpJWPF"
         mc:Ignorable="d"
-        Title="Student's Table" Height="450" Width="900" Background="#A9A9A9">
+        Title="Student's Table" Height="450" Width="920" Background="#A9A9A9">
     <Grid>
-        <DataGrid x:Name="MyGrid" AutoGenerateColumns="False" IsReadOnly="True" Background="#A9A9A9" FontSize="15" FontFamily="Arial" Margin="0,0,0,45">
+        <DataGrid x:Name="MyGrid" AutoGenerateColumns="False" IsReadOnly="True" Background="#A9A9A9" FontSize="15" FontFamily="Arial" Margin="0,0,0,45" LoadingRow="MyGrid_LoadingRow">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding Fio.Surname}"/>
                 <DataGridTextColumn Header="Имя" Binding="{Binding Fio.Name}" />
@@ -24,11 +24,12 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button Content="Добавить студента"  HorizontalAlignment="Right" Height="45" Width="187" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,-43,0,0" Click="Mouse_click"/>
-            <Button HorizontalAlignment="Left" Height="45" Width="187" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,-43,0,0"  Content="Фильтровать" Click="Mouse_click_Filt" ToolTip="Нажмите esc, чтобы получить полный список студентов" />
+            <Button Content="Добавить студента"  HorizontalAlignment="Right" Height="45" Width="187" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,1,0,0" Click="Mouse_click"/>
+            <Button HorizontalAlignment="Left" Height="45" Width="187" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,1,0,0"  Content="Фильтровать" Click="Mouse_click_Filt" ToolTip="Нажмите esc, чтобы получить полный список студентов" />
+            <Button Height="45" Width="187" HorizontalAlignment="Left" VerticalAlignment="Bottom" FlowDirection="LeftToRight" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Content="Удалить" ToolTip="Введите номер записи, которую хотите удалить в (Ключевое слово)" Click = "Delete_click" />
         </StackPanel>
         <Canvas VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="45" Width="425">
-            <GroupBox Header="Ключевое слово" Padding="0" FontSize="12" ToolTip="Нужно ввести ключевое слово для фильтрации" Margin="193,-1,0,0">
+            <GroupBox Header="Ключевое слово" Padding="0" FontSize="12" ToolTip="Нужно ввести ключевое слово для фильтрации" Margin="120,-1,0,0">
                 <TextBox x:Name="keyword" Width="200" Margin="0,0,0,0"/>
             </GroupBox>
         </Canvas>

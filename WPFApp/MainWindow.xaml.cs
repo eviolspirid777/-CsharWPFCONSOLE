@@ -31,13 +31,26 @@ namespace csSharpJWPF
             var Persons = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText(), FileWork.Options());
             MyGrid.ItemsSource = Persons;
         }
+        private void MyGrid_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Tag = e.Row.GetIndex() + 1;
+        }
         public void Mouse_click(object e, RoutedEventArgs arg)
         {
             Window2 window = new Window2();
             window.Show();
             this.Close();
         }
-        public void Mouse_click_Filt(object e, RoutedEventArgs arg)
+        public void Delete_click(object e, RoutedEventArgs arg)
+        {
+            var jsonString = FileWork.ReadText();
+            var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!;
+            exp.RemoveAll(x => exp.IndexOf(x) == Convert.ToInt32(keyword.Text) - 1);
+            jsonString = JsonSerializer.Serialize(exp, FileWork.Options());
+            FileWork.WriteText(jsonString);
+            MyGrid.ItemsSource = exp;
+        }
+            public void Mouse_click_Filt(object e, RoutedEventArgs arg)
         {
             string jsonString = FileWork.ReadText();
             var Persons = JsonSerializer.Deserialize<List<Person>>(jsonString, FileWork.Options());

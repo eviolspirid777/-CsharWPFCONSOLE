@@ -1,28 +1,6 @@
 [
   {
     "Fio": {
-      "Surname": "Бред",
-      "Name": "Пит",
-      "Patron": "Владимирович"
-    },
-    "Curriculum": {
-      "Faculty": "Мкн",
-      "Specialty": "укаука",
-      "Course": "4",
-      "Group": "мкн-б-0-20-1"
-    },
-    "Address": {
-      "City": "Ставрополь",
-      "PstIndex": "355042",
-      "Street": "Доваторцев"
-    },
-    "Contacts": {
-      "Phone": "89881108807",
-      "Mail": "eviolspirid@mail.ru"
-    }
-  },
-  {
-    "Fio": {
       "Surname": "Кравченко",
       "Name": "Виктор",
       "Patron": "Васильевич"
@@ -45,28 +23,6 @@
   },
   {
     "Fio": {
-      "Surname": "Добронравов",
-      "Name": "Федор",
-      "Patron": "Интрополитович"
-    },
-    "Curriculum": {
-      "Faculty": "mgimo",
-      "Specialty": "electric",
-      "Course": "2",
-      "Group": "elec-20-1"
-    },
-    "Address": {
-      "City": "Moscow",
-      "PstIndex": "340552",
-      "Street": "Tverskaya"
-    },
-    "Contacts": {
-      "Phone": "89001202203",
-      "Mail": "sergmiheev@gmail.com"
-    }
-  },
-  {
-    "Fio": {
       "Surname": "Джоули",
       "Name": "Анджелика",
       "Patron": "Васильевна"
@@ -85,28 +41,6 @@
     "Contacts": {
       "Phone": "8110882341",
       "Mail": "angelinajouli@icloud.com"
-    }
-  },
-  {
-    "Fio": {
-      "Surname": "Васильев",
-      "Name": "Брэд",
-      "Patron": "Пит"
-    },
-    "Curriculum": {
-      "Faculty": "imit",
-      "Specialty": "mathematic",
-      "Course": "5",
-      "Group": "pmi-102-20-1-12"
-    },
-    "Address": {
-      "City": "Абу-Даби",
-      "PstIndex": "222304",
-      "Street": "Ленина"
-    },
-    "Contacts": {
-      "Phone": "89091123242",
-      "Mail": "bredvasilev@iclod.com"
     }
   },
   {

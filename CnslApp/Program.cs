@@ -13,7 +13,6 @@ using System.Windows.Input;
 using PrsnLib;
 using FileFunction;
 using CnslApp;
-//string Path = @"content.json";
 
 namespace program;
 internal class Program

@@ -18,7 +18,7 @@ using System.Security.Cryptography;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using PrsnLib;
-using FileFunc;
+using FileFunction;
 
 namespace csSharpJWPF
 {
@@ -34,7 +34,7 @@ namespace csSharpJWPF
         private void Key_Down(object sender, RoutedEventArgs e)
         {
 
-                List<Person> persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()), FileWork.Options());
+                List<Person> persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.PathTo), FileWork.Options());
                 person.Fio.Surname = Surname.Text;
                 person.Fio.Name = Name.Text; 
                 person.Fio.Patron = Patron.Text; 

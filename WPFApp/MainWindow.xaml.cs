@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PrsnLib;
-using FileFunc;
+using FileFunction;
 
 namespace csSharpJWPF
 {
@@ -28,7 +28,7 @@ namespace csSharpJWPF
         public MainWindow()
         {
             InitializeComponent();
-            var Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()), FileWork.Options());
+            var Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.PathTo), FileWork.Options());
             MyGrid.ItemsSource = Persons;
         }
         public void Mouse_click(object e, RoutedEventArgs arg)
@@ -39,7 +39,7 @@ namespace csSharpJWPF
         }
         public void Mouse_click_Filt(object e, RoutedEventArgs arg)
         {
-            string jsonString = File.ReadAllText(FileWork.GetPath());
+            string jsonString = File.ReadAllText(FileWork.PathTo);
             var Persons = JsonSerializer.Deserialize<List<Person>>(jsonString, FileWork.Options());
             MyGrid.ItemsSource = Persons.Where(Persons => 
             Persons.Fio.Name.ToLower().Contains(keyword.Text)
@@ -55,7 +55,7 @@ namespace csSharpJWPF
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            var persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()), FileWork.Options());
+            var persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.PathTo), FileWork.Options());
             MyGrid.ItemsSource = persons;
         }
     }

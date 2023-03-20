@@ -11,20 +11,20 @@ namespace FileFunction
 {
     public class FileWork
     {
-        public static string GetPath() => Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "content.json");
+        public static string PathTo = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "content.json");
         static public StreamWriter CreateFile()
         {
-            StreamWriter sw = new StreamWriter(GetPath());
+            StreamWriter sw = new StreamWriter(PathTo);
             return sw; 
         }
         static public bool Exist()
         {
-            FileInfo sw = new FileInfo(GetPath());
+            FileInfo sw = new FileInfo(PathTo);
             if (sw.Exists) return true; else return false;
         }
         static public void WriteText( string txt)
         {
-            File.WriteAllText(GetPath(), txt);
+            File.WriteAllText(PathTo, txt);
         }
         static public JsonSerializerOptions Options()
         {

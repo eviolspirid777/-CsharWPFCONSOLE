@@ -164,7 +164,7 @@ internal class Program
     {
         if (FileWork.Exist())
         {
-            var jsonString = File.ReadAllText(FileWork.GetPath());
+            var jsonString = File.ReadAllText(FileWork.PathTo);
             var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!; //ПРЕДСТАВИТЬ ВВИДЕ МАССИВА И ОТРАБОТАТЬ КАЖДЫЙ ЭЛЕМЕНТ ЧЕРЕЗ ЦИКЛ
             ExmpMenu(exp, out int counter);
             Console.WriteLine();
@@ -189,17 +189,17 @@ internal class Program
         if (FileWork.Exist())
         {
             var persons = new List<Person>();
-            string flag = File.ReadAllText(FileWork.GetPath()).Trim();
+            string flag = File.ReadAllText(FileWork.PathTo).Trim();
             if (flag != "")
             {
-                persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
+                persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.PathTo));
             }
             Person temp = new();
             FillExmp(temp);
             Console.Clear();
             persons.Add(temp);
             string jsonString = JsonSerializer.Serialize(persons, FileWork.Options());
-            File.WriteAllText(FileWork.GetPath(), jsonString);
+            File.WriteAllText(FileWork.PathTo, jsonString);
             Console.Clear();
             PrintMenu();
         }
@@ -212,7 +212,7 @@ internal class Program
     }
     static void Sort()
     {
-        var person = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
+        var person = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.PathTo));
         person.Sort((p1, p2) => p1.Fio.Name.CompareTo(p2.Fio.Name));
         PrintPersonTable(person);
         Console.ReadKey();
@@ -221,7 +221,7 @@ internal class Program
     }
     static void Filt()
     {
-        var persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.GetPath()));
+        var persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.PathTo));
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine("Введите ключевое слово:");
         Console.ResetColor();

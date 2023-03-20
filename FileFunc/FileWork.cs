@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Text.Unicode;
 using System.Threading.Tasks;
 
-namespace FileFunc
+namespace FileFunction
 {
     public class FileWork
     {

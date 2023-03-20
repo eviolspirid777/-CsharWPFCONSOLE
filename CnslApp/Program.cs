@@ -1,12 +1,23 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using PrsnLib;
-using FileFunc;
+using FileFunction;
 using CnslApp;
 //string Path = @"content.json";
 
+namespace program;
 internal class Program
 {
-    static int TableWidth = 200; //размер таблицы
     static string EnterResult(string add)
     {
         Console.WriteLine($"Введите {add}:\n");

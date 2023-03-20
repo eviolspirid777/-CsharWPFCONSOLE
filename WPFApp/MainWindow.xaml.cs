@@ -28,7 +28,7 @@ namespace csSharpJWPF
         public MainWindow()
         {
             InitializeComponent();
-            var Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.PathTo), FileWork.Options());
+            var Persons = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText(), FileWork.Options());
             MyGrid.ItemsSource = Persons;
         }
         public void Mouse_click(object e, RoutedEventArgs arg)

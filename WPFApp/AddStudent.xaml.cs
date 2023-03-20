@@ -34,7 +34,7 @@ namespace csSharpJWPF
         private void Key_Down(object sender, RoutedEventArgs e)
         {
 
-                List<Person> persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(FileWork.PathTo), FileWork.Options());
+                List<Person> persons = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText(), FileWork.Options());
                 person.Fio.Surname = Surname.Text;
                 person.Fio.Name = Name.Text; 
                 person.Fio.Patron = Patron.Text; 

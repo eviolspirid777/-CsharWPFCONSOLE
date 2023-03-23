@@ -27,7 +27,7 @@ namespace FileFunction
                 }
             else
                 {
-                    Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathTo));
+                Persons = null;
                     return false;
                 }
         }

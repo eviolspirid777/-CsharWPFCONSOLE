@@ -58,15 +58,9 @@ namespace csSharpJWPF
             DeSerialize.Deserialize(out List<Person> Persons);
             FillCount(Persons);
             MyGrid.ItemsSource = Persons.Where(Persons => 
-            Persons.Fio.Name.ToLower().Contains(keyword.Text)
-            || Persons.Fio.Surname.ToLower().Contains(keyword.Text)
-            || Persons.Fio.Patron.ToLower().Contains(keyword.Text)
-            || Persons.Fio.Name.ToUpper().Contains(keyword.Text)
-            || Persons.Fio.Surname.ToUpper().Contains(keyword.Text)
-            || Persons.Fio.Patron.ToUpper().Contains(keyword.Text)
-            || Persons.Fio.Name.Contains(keyword.Text)
-            || Persons.Fio.Surname.Contains(keyword.Text) 
-            || Persons.Fio.Patron.Contains(keyword.Text)
+               Persons.Fio.Name.Contains(keyword.Text, StringComparison.CurrentCultureIgnoreCase)
+            || Persons.Fio.Surname.Contains(keyword.Text, StringComparison.CurrentCultureIgnoreCase)
+            || Persons.Fio.Patron.Contains(keyword.Text, StringComparison.CurrentCultureIgnoreCase)
             );
         }
         private void Exit_Click(object sender, RoutedEventArgs e)

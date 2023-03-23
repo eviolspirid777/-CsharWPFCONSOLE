@@ -248,15 +248,9 @@ internal class Program
         var keyword = Console.ReadLine();
         Console.Clear();
         var filteredList = persons.Where(person =>
-            person.Fio.Surname.Contains(keyword) ||
-            person.Fio.Name.Contains(keyword) ||
-            person.Fio.Patron.Contains(keyword) ||
-            person.Fio.Name.ToLower().Contains(keyword) ||
-            person.Fio.Surname.ToLower().Contains(keyword) ||
-            person.Fio.Patron.ToLower().Contains(keyword) ||
-            person.Fio.Surname.ToUpper().Contains(keyword) ||
-            person.Fio.Name.ToUpper().Contains(keyword) ||
-            person.Fio.Patron.ToUpper().Contains(keyword)
+            person.Fio.Surname.Contains(keyword, StringComparison.CurrentCultureIgnoreCase) ||
+            person.Fio.Name.Contains(keyword, StringComparison.CurrentCultureIgnoreCase) ||
+            person.Fio.Patron.Contains(keyword, StringComparison.CurrentCultureIgnoreCase)
         );
         if (filteredList.Count() > 0)
         {

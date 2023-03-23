@@ -25,9 +25,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button Content="Добавить студента"  HorizontalAlignment="Right" Height="45" Width="187" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,1,0,0" Click="Mouse_click"/>
-            <Button HorizontalAlignment="Left" Height="45" Width="187" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,1,0,0"  Content="Фильтровать" Click="Mouse_click_Filt" ToolTip="Нажмите esc, чтобы получить полный список студентов" />
-            <Button Height="45" Width="187" HorizontalAlignment="Left" VerticalAlignment="Bottom" FlowDirection="LeftToRight" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Content="Удалить" ToolTip="Введите номер записи, которую хотите удалить в (Ключевое слово)" Click = "Delete_click" />
+            <Button Content="Добавить студента"  HorizontalAlignment="Right" Height="45" Width="300" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,1,0,0" Click="Mouse_click"/>
+            <Button HorizontalAlignment="Left" Height="45" Width="300" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Margin="0,1,0,0"  Content="Фильтровать" Click="Mouse_click_Filt" ToolTip="Нажмите esc, чтобы получить полный список студентов" />
+            <Button Height="45" Width="300" HorizontalAlignment="Left" VerticalAlignment="Bottom" FlowDirection="LeftToRight" Background="#696969" FontSize="18" FontFamily="Tahoma" Opacity="0.9" Foreground="#C0C0C0" Content="Удалить" ToolTip="Введите номер записи, которую хотите удалить в (Ключевое слово)" Click = "Delete_click" />
         </StackPanel>
         <Canvas VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="45" Width="425">
             <GroupBox Header="Ключевое слово" Padding="0" FontSize="12" ToolTip="Нужно ввести ключевое слово для фильтрации" Margin="120,-1,0,0">

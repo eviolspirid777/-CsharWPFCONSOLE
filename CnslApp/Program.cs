@@ -13,10 +13,17 @@ using System.Windows.Input;
 using PrsnLib;
 using FileFunction;
 using CnslApp;
+using JsonSerializeLib;
 
 namespace program;
 internal class Program
-{
+{  
+    static void PrintTextYellow(string text)
+    {
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.WriteLine(text);
+        Console.ResetColor();
+    }
     static string EnterResult(string add)
     {
         Console.WriteLine($"Введите {add}:\n");
@@ -25,22 +32,16 @@ internal class Program
     }
     static void EditNode(List<Person> persons)
     {
-        Console.ForegroundColor = ConsoleColor.DarkYellow;
-        Console.WriteLine("\nВы хотите изменить запись?(y/n)");
-        Console.ResetColor();
+        PrintTextYellow("\nВы хотите изменить запись?(y/n)");
         var sw = Console.ReadLine();
         if (sw == "y")
         {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("Введите номер записи, которую хотите изменить:");
-            Console.ResetColor();
+            PrintTextYellow("Введите номер записи, которую хотите изменить:");
             string? num = Console.ReadLine();
             if (int.TryParse(num, out int number) && number <= persons.Count)
             {
                 number--;
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Что вы хотите изменить:\n1)ФИО\n2)Город\n3)Почтовый индекс\n4)Улицу\n5)Почту\n6)Телефон\n7)Факультет\n8)Курс\n9)Группу\n10)Специальность\n");
-                Console.ResetColor();
+                PrintTextYellow("Что вы хотите изменить:\n1)ФИО\n2)Город\n3)Почтовый индекс\n4)Улицу\n5)Почту\n6)Телефон\n7)Факультет\n8)Курс\n9)Группу\n10)Специальность\n");
                 string t = Console.ReadLine();
                 switch (t)
                 {
@@ -77,9 +78,7 @@ internal class Program
                         persons[number].Curriculum.Specialty = EnterResult("Специальность");
                         break;
                     default:
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        Console.WriteLine("Введен неправильный символ!");
-                        Console.ResetColor();
+                        PrintTextYellow("Введен неправильный символ!");
                         Console.ReadKey();
                         EditNode(persons);
                         break;
@@ -87,56 +86,52 @@ internal class Program
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Вы вышли за пределы записей!");
-                Console.ResetColor();
+                PrintTextYellow("Вы вышли за пределы записей!");
                 Thread.Sleep(1200);
                 ListMenu();
             }
         }
         if (sw != "y" && sw != "n")
         {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("Вы ввели неправильный символ!");
-            Console.ResetColor();
+            PrintTextYellow("Вы ввели неправильный символ!");
             Thread.Sleep(1000);
             EditNode(persons);
         }
     }
-    static void FillExmp()
+    static void SetPerson()
     {
         string flag = FileWork.ReadText().Trim();
         if (flag != "")
         {
-            Person temper = new Person();
-            var exp = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText())!;
+            Person Person = new Person();
+            DeSerialize.Deserialize(out List<Person>Persons);
             Console.WriteLine("Введите ФИО:\n Имя");
-            temper.Fio.Name = Console.ReadLine();
+            Person.Fio.Name = Console.ReadLine();
             Console.WriteLine(" Фамилия:");
-            temper.Fio.Surname = Console.ReadLine();
+            Person.Fio.Surname = Console.ReadLine();
             Console.WriteLine(" Отчество:");
-            temper.Fio.Patron = Console.ReadLine();
+            Person.Fio.Patron = Console.ReadLine();
             Console.WriteLine("Введите город:");
-            temper.Address.City = Console.ReadLine();
+            Person.Address.City = Console.ReadLine();
             Console.WriteLine("Введите почтовый индекс:");
-            temper.Address.PstIndex = Console.ReadLine();
+            Person.Address.PstIndex = Console.ReadLine();
             Console.WriteLine("Введите улицу:");
-            temper.Address.Street = Console.ReadLine();
+            Person.Address.Street = Console.ReadLine();
             Console.WriteLine("Введите почту:");
-            temper.Contacts.Mail = Console.ReadLine();
+            Person.Contacts.Mail = Console.ReadLine();
             Console.WriteLine("Введите телефон:");
-            temper.Contacts.Phone = Console.ReadLine();
+            Person.Contacts.Phone = Console.ReadLine();
             Console.WriteLine("Введите факультет:");
-            temper.Curriculum.Faculty = Console.ReadLine();
+            Person.Curriculum.Faculty = Console.ReadLine();
             Console.WriteLine("Введите курс:");
-            temper.Curriculum.Course = Console.ReadLine();
+            Person.Curriculum.Course = Console.ReadLine();
             Console.WriteLine("Введите группу:");
-            temper.Curriculum.Group = Console.ReadLine();
+            Person.Curriculum.Group = Console.ReadLine();
             Console.WriteLine("Введите специальность:");
-            temper.Curriculum.Specialty = Console.ReadLine();
+            Person.Curriculum.Specialty = Console.ReadLine();
             Console.Clear();
-            exp.Add(temper);
-            string jsonString = JsonSerializer.Serialize(exp, FileWork.Options());
+            Persons.Add(Person);
+            DeSerialize.Serialize(out string jsonString,Persons);
             FileWork.WriteText(jsonString);
         }
         else
@@ -144,14 +139,14 @@ internal class Program
             Console.WriteLine("Файл пуст!");
         }
     }
-    static void ExmpMenu(List<Person> example)
+    static void ExmpMenu(List<Person> Persons)
     {
         int counter = 1;
         Console.Clear();
         Table.PrintLine();
         Table.PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
         Table.PrintLine();
-        foreach (var item in example)
+        foreach (var item in Persons)
         {
             Table.PrintRow($"{counter}", $"{item.Fio.Name}", $"{item.Fio.Surname}", $"{item.Fio.Patron}", $"{item.Address.City}", $"{item.Address.PstIndex}", $"{item.Address.Street}", $"{item.Contacts.Mail}", $"{item.Contacts.Phone}", $"{item.Curriculum.Course}", $"{item.Curriculum.Faculty}", $"{item.Curriculum.Group}", $"{item.Curriculum.Specialty}");
             counter++;
@@ -176,21 +171,18 @@ internal class Program
     {
         if (FileWork.Exist())
         {
-            var jsonString = FileWork.ReadText();
-            var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!;
-            ExmpMenu(exp);
+            DeSerialize.Deserialize(out List<Person> Persons);
+            ExmpMenu(Persons);
             Console.WriteLine();
-            EditNode(exp);
-            jsonString = JsonSerializer.Serialize(exp, FileWork.Options());
+            EditNode(Persons);
+            DeSerialize.Serialize(out string jsonString, Persons);
             FileWork.WriteText( jsonString);
             Console.Clear();
             PrintMenu();
         }
         else
         {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("Не могу найти файл! Создаю новый...");
-            Console.ResetColor();
+            PrintTextYellow("Не могу найти файл! Создаю новый...");
             FileWork.CreateFile();
             Thread.Sleep(1000);
             ListMenu();
@@ -200,20 +192,18 @@ internal class Program
     {
         if (FileWork.Exist())
         {
-            FillExmp();
+            SetPerson();
             Console.Clear();
             PrintMenu();
         }
         else
         {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("Не могу найти файл!");
-            Console.ResetColor();
+            PrintTextYellow("Не могу найти файл!");
         }
     }
     static void Sort()
     {
-        var person = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText());
+        DeSerialize.Deserialize(out List<Person> person);
         person.Sort((p1, p2) => p1.Fio.Name.CompareTo(p2.Fio.Name));
         PrintPersonTable(person);
         Console.ReadKey();
@@ -224,18 +214,15 @@ internal class Program
     {
         if (FileWork.Exist())
         {
-            var jsonString = FileWork.ReadText();
-            var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!;
-            ExmpMenu(exp);
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("\n\nВведите номер записи, которую вы хотите удалить");
-            Console.ResetColor();
+            DeSerialize.Deserialize(out List<Person> Persons);
+            ExmpMenu(Persons);
+            PrintTextYellow("\n\nВведите номер записи, которую вы хотите удалить");
             string num = Console.ReadLine();
             if(int.TryParse(num, out int number))
             {
                 Console.Clear();
-                exp.RemoveAll(x => exp.IndexOf(x) == number - 1);
-                jsonString = JsonSerializer.Serialize(exp, FileWork.Options());
+                Persons.RemoveAll(x => Persons.IndexOf(x) == number - 1);
+                DeSerialize.Serialize(out string jsonString, Persons);
                 FileWork.WriteText(jsonString);
                 PrintMenu();
             }
@@ -248,9 +235,7 @@ internal class Program
         }
         else
         {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("Файл не существует!");
-            Console.ResetColor();
+            PrintTextYellow("Файл не существует!");
             FileWork.CreateFile();
             Thread.Sleep(1000);
             PrintMenu();
@@ -258,22 +243,20 @@ internal class Program
     }
     static void Filt()
     {
-        var persons = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText());
-        Console.ForegroundColor = ConsoleColor.DarkYellow;
-        Console.WriteLine("Введите ключевое слово:");
-        Console.ResetColor();
-        var sw = Console.ReadLine();
+        DeSerialize.Deserialize(out List < Person > persons);
+        PrintTextYellow("Введите ключевое слово:");
+        var keyword = Console.ReadLine();
         Console.Clear();
         var filteredList = persons.Where(person =>
-            person.Fio.Surname.Contains(sw) ||
-            person.Fio.Name.Contains(sw) ||
-            person.Fio.Patron.Contains(sw) ||
-            person.Fio.Name.ToLower().Contains(sw) ||
-            person.Fio.Surname.ToLower().Contains(sw) ||
-            person.Fio.Patron.ToLower().Contains(sw) ||
-            person.Fio.Surname.ToUpper().Contains(sw) ||
-            person.Fio.Name.ToUpper().Contains(sw) ||
-            person.Fio.Patron.ToUpper().Contains(sw)
+            person.Fio.Surname.Contains(keyword) ||
+            person.Fio.Name.Contains(keyword) ||
+            person.Fio.Patron.Contains(keyword) ||
+            person.Fio.Name.ToLower().Contains(keyword) ||
+            person.Fio.Surname.ToLower().Contains(keyword) ||
+            person.Fio.Patron.ToLower().Contains(keyword) ||
+            person.Fio.Surname.ToUpper().Contains(keyword) ||
+            person.Fio.Name.ToUpper().Contains(keyword) ||
+            person.Fio.Patron.ToUpper().Contains(keyword)
         );
         if (filteredList.Count() > 0)
         {
@@ -290,22 +273,16 @@ internal class Program
         }
         else
         {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("Не нашел записей..!");
-            Console.ResetColor();
+            PrintTextYellow("Не нашел записей..!");
         }
-        Console.ForegroundColor = ConsoleColor.DarkYellow;
-        Console.WriteLine("\n\nНажмите любую клавишу...");
-        Console.ResetColor();
+        PrintTextYellow("\n\nНажмите любую клавишу...");
         Console.ReadKey();
         Console.Clear();
         PrintMenu();
     }
     static void PrintMenu()
     {
-        Console.ForegroundColor = ConsoleColor.DarkYellow;
-        Console.Write("Введите:\n1.Получить список (изменить запись)\n2.Добавить запись\n3.Удалить запись\n4.Сортировать\n5.Фильтровать\n6.Выйти\n");
-        Console.ResetColor();
+        PrintTextYellow("Введите:\n1.Получить список (изменить запись)\n2.Добавить запись\n3.Удалить запись\n4.Сортировать\n5.Фильтровать\n6.Выйти\n");
         var ch = Convert.ToChar(Console.ReadLine());
         Console.Clear();
         switch (ch)
@@ -337,9 +314,7 @@ internal class Program
                 }
             case '6':
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine("Удачи!");
-                    Console.ResetColor();
+                    PrintTextYellow("Удачи!");
                     Thread.Sleep(1200);
                     Console.Clear();
                     System.Environment.Exit(0);
@@ -347,9 +322,7 @@ internal class Program
                 }
             default:
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine("Ошибка! Не могу получить символ!");
-                    Console.ResetColor();
+                    PrintTextYellow("Ошибка! Не могу получить символ!");
                     Thread.Sleep(500);
                     Console.Clear();
                     PrintMenu();

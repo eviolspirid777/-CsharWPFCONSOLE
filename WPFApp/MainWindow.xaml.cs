@@ -20,6 +20,7 @@ using System.Windows.Shapes;
 using PrsnLib;
 using FileFunction;
 using System.Globalization;
+using JsonSerializeLib;
 
 namespace csSharpJWPF
 {
@@ -28,7 +29,7 @@ namespace csSharpJWPF
         public MainWindow()
         {
             InitializeComponent();
-            var Persons = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText(), FileWork.Options());
+            DeSerialize.Deserialize(out List<Person> Persons);
             FillCount(Persons);
             MyGrid.ItemsSource = Persons;
         }
@@ -40,22 +41,21 @@ namespace csSharpJWPF
         }
         public void Delete_click(object e, RoutedEventArgs arg)
         {
-            var jsonString = FileWork.ReadText();
-            var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!;
-            FillCount(exp);
+            DeSerialize.Deserialize(out List<Person> Persons);
+            FillCount(Persons);
             if (int.TryParse(keyword.Text, out int num))
-                exp.RemoveAll(x => exp.IndexOf(x) == Convert.ToInt32(keyword.Text) - 1);
+                Persons.RemoveAll(x => Persons.IndexOf(x) == Convert.ToInt32(keyword.Text) - 1);
             else
                 MessageBox.Show("Ошибка! Введите номер записи!");
-            FillCount(exp);
-            jsonString = JsonSerializer.Serialize(exp, FileWork.Options());
+            FillCount(Persons);
+            DeSerialize.Serialize(out string jsonString,Persons);
             FileWork.WriteText(jsonString);
-            MyGrid.ItemsSource = exp;
+            MyGrid.ItemsSource = Persons;
         }
             public void Mouse_click_Filt(object e, RoutedEventArgs arg)
         {
             string jsonString = FileWork.ReadText();
-            var Persons = JsonSerializer.Deserialize<List<Person>>(jsonString, FileWork.Options());
+            DeSerialize.Deserialize(out List<Person> Persons);
             FillCount(Persons);
             MyGrid.ItemsSource = Persons.Where(Persons => 
             Persons.Fio.Name.ToLower().Contains(keyword.Text)
@@ -71,9 +71,9 @@ namespace csSharpJWPF
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            var persons = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText(), FileWork.Options());
-            FillCount(persons);
-            MyGrid.ItemsSource = persons;
+            DeSerialize.Deserialize(out List<Person> Persons);
+            FillCount(Persons);
+            MyGrid.ItemsSource = Persons;
         }
         public void FillCount(List<Person> Persons)
         {

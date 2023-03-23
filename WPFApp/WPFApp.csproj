@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FileFunc\FileFunc.csproj" />
+    <ProjectReference Include="..\JsonSerializeLib\JsonSerializeLib.csproj" />
     <ProjectReference Include="..\PrsnLib\PrsnLib.csproj" />
   </ItemGroup>
 

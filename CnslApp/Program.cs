@@ -13,7 +13,6 @@ using System.Windows.Input;
 using PrsnLib;
 using FileFunction;
 using CnslApp;
-using JsonSerializeLib;
 
 namespace program;
 internal class Program
@@ -100,11 +99,9 @@ internal class Program
     }
     static void SetPerson()
     {
-        string flag = FileWork.ReadText().Trim();
-        if (flag != "")
+        if (FileWork.ReadData(out List<Person> Persons))
         {
             Person Person = new Person();
-            DeSerialize.Deserialize(out List<Person>Persons);
             Console.WriteLine("Введите ФИО:\n Имя");
             Person.Fio.Name = Console.ReadLine();
             Console.WriteLine(" Фамилия:");
@@ -131,8 +128,7 @@ internal class Program
             Person.Curriculum.Specialty = Console.ReadLine();
             Console.Clear();
             Persons.Add(Person);
-            DeSerialize.Serialize(out string jsonString,Persons);
-            FileWork.WriteText(jsonString);
+            FileWork.WriteData(Persons);
         }
         else
         {
@@ -169,14 +165,12 @@ internal class Program
     }
     static void ListMenu()
     {
-        if (FileWork.Exist())
+        if (FileWork.ReadData(out List<Person> Persons))
         {
-            DeSerialize.Deserialize(out List<Person> Persons);
             ExmpMenu(Persons);
             Console.WriteLine();
             EditNode(Persons);
-            DeSerialize.Serialize(out string jsonString, Persons);
-            FileWork.WriteText( jsonString);
+            FileWork.WriteData(Persons);
             Console.Clear();
             PrintMenu();
         }
@@ -190,7 +184,7 @@ internal class Program
     }
     static void AddNode()
     {
-        if (FileWork.Exist())
+        if (FileWork.ReadData(out List<Person> Persons))
         {
             SetPerson();
             Console.Clear();
@@ -203,18 +197,23 @@ internal class Program
     }
     static void Sort()
     {
-        DeSerialize.Deserialize(out List<Person> person);
-        person.Sort((p1, p2) => p1.Fio.Name.CompareTo(p2.Fio.Name));
-        PrintPersonTable(person);
-        Console.ReadKey();
-        Console.Clear();
-        PrintMenu();
+        if (FileWork.ReadData(out List<Person> person))
+        {
+            person.Sort((p1, p2) => p1.Fio.Name.CompareTo(p2.Fio.Name));
+            PrintPersonTable(person);
+            Console.ReadKey();
+            Console.Clear();
+            PrintMenu();
+        }
+        else 
+        {
+            PrintTextYellow("Не могу найти файл!");
+        }
     }
     static void DeleteNode()
     {
-        if (FileWork.Exist())
+        if (FileWork.ReadData(out List<Person> Persons))
         {
-            DeSerialize.Deserialize(out List<Person> Persons);
             ExmpMenu(Persons);
             PrintTextYellow("\n\nВведите номер записи, которую вы хотите удалить");
             string num = Console.ReadLine();
@@ -222,13 +221,12 @@ internal class Program
             {
                 Console.Clear();
                 Persons.RemoveAll(x => Persons.IndexOf(x) == number - 1);
-                DeSerialize.Serialize(out string jsonString, Persons);
-                FileWork.WriteText(jsonString);
+                FileWork.WriteData(Persons);
                 PrintMenu();
             }
             else
             {
-                Console.WriteLine("Вы ввели не число!");
+                PrintTextYellow("Вы ввели не число!");
                 Console.Clear();
                 DeleteNode();
             }
@@ -243,36 +241,42 @@ internal class Program
     }
     static void Filt()
     {
-        DeSerialize.Deserialize(out List < Person > persons);
-        PrintTextYellow("Введите ключевое слово:");
-        var keyword = Console.ReadLine();
-        Console.Clear();
-        var filteredList = persons.Where(person =>
-            person.Fio.Surname.Contains(keyword, StringComparison.CurrentCultureIgnoreCase) ||
-            person.Fio.Name.Contains(keyword, StringComparison.CurrentCultureIgnoreCase) ||
-            person.Fio.Patron.Contains(keyword, StringComparison.CurrentCultureIgnoreCase)
-        );
-        if (filteredList.Count() > 0)
+        if (FileWork.ReadData(out List<Person> Persons))
         {
-            int counter = 1;
-            Table.PrintLine();
-            Table.PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
-            Table.PrintLine();
-            foreach (var person in filteredList)
+            PrintTextYellow("Введите ключевое слово:");
+            var keyword = Console.ReadLine();
+            Console.Clear();
+            var filteredList = Persons.Where(person =>
+                person.Fio.Surname.Contains(keyword, StringComparison.CurrentCultureIgnoreCase) ||
+                person.Fio.Name.Contains(keyword, StringComparison.CurrentCultureIgnoreCase) ||
+                person.Fio.Patron.Contains(keyword, StringComparison.CurrentCultureIgnoreCase)
+            );
+            if (filteredList.Count() > 0)
             {
-                Table.PrintRow($"{counter}", $"{person.Fio.Name}", $"{person.Fio.Surname}", $"{person.Fio.Patron}", $"{person.Address.City}", $"{person.Address.PstIndex}", $"{person.Address.Street}", $"{person.Contacts.Mail}", $"{person.Contacts.Phone}", $"{person.Curriculum.Course}", $"{person.Curriculum.Faculty}", $"{person.Curriculum.Group}", $"{person.Curriculum.Specialty}");
-                counter++;
+                int counter = 1;
+                Table.PrintLine();
+                Table.PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
+                Table.PrintLine();
+                foreach (var person in filteredList)
+                {
+                    Table.PrintRow($"{counter}", $"{person.Fio.Name}", $"{person.Fio.Surname}", $"{person.Fio.Patron}", $"{person.Address.City}", $"{person.Address.PstIndex}", $"{person.Address.Street}", $"{person.Contacts.Mail}", $"{person.Contacts.Phone}", $"{person.Curriculum.Course}", $"{person.Curriculum.Faculty}", $"{person.Curriculum.Group}", $"{person.Curriculum.Specialty}");
+                    counter++;
+                }
+                Table.PrintLine();
             }
-            Table.PrintLine();
+            else
+            {
+                PrintTextYellow("Не нашел записей..!");
+            }
+            PrintTextYellow("\n\nНажмите любую клавишу...");
+            Console.ReadKey();
+            Console.Clear();
+            PrintMenu();
         }
         else
         {
-            PrintTextYellow("Не нашел записей..!");
+            PrintTextYellow("Файл не найден!");
         }
-        PrintTextYellow("\n\nНажмите любую клавишу...");
-        Console.ReadKey();
-        Console.Clear();
-        PrintMenu();
     }
     static void PrintMenu()
     {

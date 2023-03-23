@@ -4,15 +4,18 @@ using FileFunction;
 
 namespace JsonSerializeLib
 {
-    public class DeSerialize
+    public class Deserializer
     {
-        static public void Deserialize<T>(out T? exmp)
+        /*
+        static public List <Person> Deserialize()
         {
-            exmp = JsonSerializer.Deserialize<T>(FileWork.ReadText());
+            return JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText());
         }
-        static public void Serialize<T1>(out string jsonstring , T1? Persons)
+        static public void Serialize( List<Person> Persons)
         {
-            jsonstring = JsonSerializer.Serialize(Persons, FileWork.Options());
+            string jsonString = JsonSerializer.Serialize(Persons, FileWork.Options());
+            FileWork.WriteText(jsonString);
         }
+        */
     }
 }

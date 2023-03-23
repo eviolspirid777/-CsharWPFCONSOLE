@@ -6,7 +6,7 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 using System.Threading.Tasks;
-
+using PrsnLib;
 namespace FileFunction
 {
     public class FileWork
@@ -15,19 +15,28 @@ namespace FileFunction
         static public StreamWriter CreateFile()
         {
             StreamWriter sw = new StreamWriter(PathTo);
-            return sw; 
+            return sw;
         }
-        static public string ReadText() => File.ReadAllText(PathTo);
-        static public bool Exist()
+        static public bool ReadData(out List<Person> Persons)
         {
-            FileInfo sw = new FileInfo(PathTo);
-            if (sw.Exists) return true; else return false;
+            string flag = File.ReadAllText(PathTo).Trim();
+            if (flag != "")
+                {
+                    Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathTo));
+                    return true;
+                }
+            else
+                {
+                    Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathTo));
+                    return false;
+                }
         }
-        static public void WriteText( string txt)
+        static public void WriteData(List <Person> Persons)
         {
-            File.WriteAllText(PathTo, txt);
+            string jsonString = JsonSerializer.Serialize(Persons, Options());
+            File.WriteAllText(PathTo, jsonString);
         }
-        static public JsonSerializerOptions Options()
+        static JsonSerializerOptions Options()
         {
             var options = new JsonSerializerOptions
             {

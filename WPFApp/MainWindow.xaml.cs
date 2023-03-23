@@ -20,7 +20,6 @@ using System.Windows.Shapes;
 using PrsnLib;
 using FileFunction;
 using System.Globalization;
-using JsonSerializeLib;
 
 namespace csSharpJWPF
 {
@@ -29,7 +28,7 @@ namespace csSharpJWPF
         public MainWindow()
         {
             InitializeComponent();
-            DeSerialize.Deserialize(out List<Person> Persons);
+            FileWork.ReadData(out List<Person> Persons);
             FillCount(Persons);
             MyGrid.ItemsSource = Persons;
         }
@@ -41,21 +40,19 @@ namespace csSharpJWPF
         }
         public void Delete_click(object e, RoutedEventArgs arg)
         {
-            DeSerialize.Deserialize(out List<Person> Persons);
+            FileWork.ReadData(out List<Person> Persons);
             FillCount(Persons);
             if (int.TryParse(keyword.Text, out int num))
                 Persons.RemoveAll(x => Persons.IndexOf(x) == Convert.ToInt32(keyword.Text) - 1);
             else
                 MessageBox.Show("Ошибка! Введите номер записи!");
             FillCount(Persons);
-            DeSerialize.Serialize(out string jsonString,Persons);
-            FileWork.WriteText(jsonString);
+            FileWork.WriteData(Persons);
             MyGrid.ItemsSource = Persons;
         }
             public void Mouse_click_Filt(object e, RoutedEventArgs arg)
         {
-            string jsonString = FileWork.ReadText();
-            DeSerialize.Deserialize(out List<Person> Persons);
+             FileWork.ReadData(out List<Person>Persons);
             FillCount(Persons);
             MyGrid.ItemsSource = Persons.Where(Persons => 
                Persons.Fio.Name.Contains(keyword.Text, StringComparison.CurrentCultureIgnoreCase)
@@ -65,16 +62,16 @@ namespace csSharpJWPF
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            DeSerialize.Deserialize(out List<Person> Persons);
+            FileWork.ReadData(out List<Person> Persons);
             FillCount(Persons);
             MyGrid.ItemsSource = Persons;
         }
         public void FillCount(List<Person> Persons)
         {
-            int[] capacity = new int[Persons.Count];
+            int[] Capacity = new int[Persons.Count];
             for (int i = 0; i < Persons.Count; i++)
             {
-                capacity[i] = i;
+                Capacity[i] = i;
                 Persons[i].Id = i+1;
             }
         }

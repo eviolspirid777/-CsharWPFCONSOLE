@@ -113,5 +113,28 @@
       "Phone": "89004231123",
       "Mail": "metelkin.maks@mail.ru"
     }
+  },
+  {
+    "Id": null,
+    "Fio": {
+      "Surname": "Тулум",
+      "Name": "Владимир",
+      "Patron": "Васильевич"
+    },
+    "Curriculum": {
+      "Faculty": "pmi",
+      "Specialty": "программист",
+      "Course": "4",
+      "Group": "pmi-20-1-23-4"
+    },
+    "Address": {
+      "City": "Ставрополь",
+      "PstIndex": "355042",
+      "Street": "Ленина"
+    },
+    "Contacts": {
+      "Phone": "89187932231",
+      "Mail": "vladimir.tulum@qip.ru"
+    }
   }
 ]

@@ -19,7 +19,6 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using PrsnLib;
 using FileFunction;
-using JsonSerializeLib;
 
 namespace csSharpJWPF
 {
@@ -34,7 +33,7 @@ namespace csSharpJWPF
 
         private void Key_Down(object sender, RoutedEventArgs e)
         {
-                DeSerialize.Deserialize(out List<Person> persons);
+                FileWork.ReadData(out List<Person> Persons);
                 person.Fio.Surname = Surname.Text;
                 person.Fio.Name = Name.Text; 
                 person.Fio.Patron = Patron.Text; 
@@ -47,9 +46,8 @@ namespace csSharpJWPF
                 person.Address.Street = Street.Text; 
                 person.Contacts.Phone = Phone.Text; 
                 person.Contacts.Mail = Mail.Text; 
-                persons.Add(person);
-                DeSerialize.Serialize(out string jsonString, persons);              //сериализация, где exmp - список <List>, options настройки
-                FileWork.WriteText(jsonString);                                              //@"content.json" - файл; jsonstring - строка, которую надо записать
+                Persons.Add(person);
+                FileWork.WriteData(Persons);              //сериализация, где exmp - список <List>, options настройки
                 MainWindow window = new MainWindow();
                 window.Show();
                 this.Close();

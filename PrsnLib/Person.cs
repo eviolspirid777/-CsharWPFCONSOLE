@@ -5,6 +5,7 @@ namespace PrsnLib
 {
     public class Person
     {
+        public int? Id { get; set; }
         public Fio? Fio { get; set; }
         public Curriculum? Curriculum { get; set; }
         public Address? Address { get; set; }

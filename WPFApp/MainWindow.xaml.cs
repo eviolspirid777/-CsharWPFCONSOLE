@@ -19,16 +19,17 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PrsnLib;
 using FileFunction;
+using System.Globalization;
 
 namespace csSharpJWPF
 {
-
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
             var Persons = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText(), FileWork.Options());
+            FillCount(Persons);
             MyGrid.ItemsSource = Persons;
         }
         public void Mouse_click(object e, RoutedEventArgs arg)
@@ -41,12 +42,12 @@ namespace csSharpJWPF
         {
             var jsonString = FileWork.ReadText();
             var exp = JsonSerializer.Deserialize<List<Person>>(jsonString)!;
+            FillCount(exp);
             if (int.TryParse(keyword.Text, out int num))
                 exp.RemoveAll(x => exp.IndexOf(x) == Convert.ToInt32(keyword.Text) - 1);
             else
                 MessageBox.Show("Ошибка! Введите номер записи!");
-                //exp.Where(x => x.Equals(keyword.Text));
-
+            FillCount(exp);
             jsonString = JsonSerializer.Serialize(exp, FileWork.Options());
             FileWork.WriteText(jsonString);
             MyGrid.ItemsSource = exp;
@@ -55,6 +56,7 @@ namespace csSharpJWPF
         {
             string jsonString = FileWork.ReadText();
             var Persons = JsonSerializer.Deserialize<List<Person>>(jsonString, FileWork.Options());
+            FillCount(Persons);
             MyGrid.ItemsSource = Persons.Where(Persons => 
             Persons.Fio.Name.ToLower().Contains(keyword.Text)
             || Persons.Fio.Surname.ToLower().Contains(keyword.Text)
@@ -70,7 +72,17 @@ namespace csSharpJWPF
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             var persons = JsonSerializer.Deserialize<List<Person>>(FileWork.ReadText(), FileWork.Options());
+            FillCount(persons);
             MyGrid.ItemsSource = persons;
+        }
+        public void FillCount(List<Person> Persons)
+        {
+            int[] capacity = new int[Persons.Count];
+            for (int i = 0; i < Persons.Count; i++)
+            {
+                capacity[i] = i;
+                Persons[i].Id = i+1;
+            }
         }
     }
 }

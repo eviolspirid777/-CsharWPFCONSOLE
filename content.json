@@ -1,27 +1,6 @@
 [
   {
-    "Fio": {
-      "Surname": "Кравченко",
-      "Name": "Виктор",
-      "Patron": "Васильевич"
-    },
-    "Curriculum": {
-      "Faculty": "MIT",
-      "Specialty": "programmer",
-      "Course": "4",
-      "Group": "MIT-20-1"
-    },
-    "Address": {
-      "City": "Майами",
-      "PstIndex": "200113",
-      "Street": "st, MIT"
-    },
-    "Contacts": {
-      "Phone": "80001324432",
-      "Mail": "FergSerg@gmail.com"
-    }
-  },
-  {
+    "Id": 1,
     "Fio": {
       "Surname": "Джоули",
       "Name": "Анджелика",
@@ -44,25 +23,95 @@
     }
   },
   {
+    "Id": 2,
     "Fio": {
-      "Surname": "Маренкова",
-      "Name": "Василиса",
-      "Patron": "Штец"
+      "Surname": "Васильев",
+      "Name": "Василий",
+      "Patron": "Васильевич"
     },
     "Curriculum": {
-      "Faculty": "под",
-      "Specialty": "Педагог",
-      "Course": "1",
-      "Group": "под-201-20-13-1"
+      "Faculty": "вац",
+      "Specialty": "Военный",
+      "Course": "2",
+      "Group": "вац-203-10-2-1"
+    },
+    "Address": {
+      "City": "Москва",
+      "PstIndex": "310002",
+      "Street": "Лермонтова"
+    },
+    "Contacts": {
+      "Phone": "89661233321",
+      "Mail": "vasileev.vas@mail.ru"
+    }
+  },
+  {
+    "Id": 3,
+    "Fio": {
+      "Surname": "Сегриенко",
+      "Name": "Владимир",
+      "Patron": "Юрьевич"
+    },
+    "Curriculum": {
+      "Faculty": "юрфак",
+      "Specialty": "юрист",
+      "Course": "5",
+      "Group": "юр-201-300-10-2"
     },
     "Address": {
       "City": "Саратов",
-      "PstIndex": "322011",
-      "Street": "ул.Ленина"
+      "PstIndex": "311024",
+      "Street": "Пирогова"
     },
     "Contacts": {
-      "Phone": "89091123123",
-      "Mail": "marenkova.vas@qip.ru"
+      "Phone": "8110775421",
+      "Mail": "vlad.serg@mail.ru"
+    }
+  },
+  {
+    "Id": null,
+    "Fio": {
+      "Surname": "Герцин",
+      "Name": "Азрет",
+      "Patron": "Вахтангович"
+    },
+    "Curriculum": {
+      "Faculty": "эконом",
+      "Specialty": "экономист",
+      "Course": "1",
+      "Group": "экон-20-100-20-1"
+    },
+    "Address": {
+      "City": "Ставрополь",
+      "PstIndex": "322011",
+      "Street": "Доваторцев"
+    },
+    "Contacts": {
+      "Phone": "8972332123",
+      "Mail": "spiriton@gmail.com"
+    }
+  },
+  {
+    "Id": null,
+    "Fio": {
+      "Surname": "Метелкин",
+      "Name": "Максим",
+      "Patron": "Юрьевич"
+    },
+    "Curriculum": {
+      "Faculty": "поб",
+      "Specialty": "Педагог",
+      "Course": "4",
+      "Group": "поб-20-1-К-2"
+    },
+    "Address": {
+      "City": "Санкт-Петербург",
+      "PstIndex": "300213",
+      "Street": "Пушкина"
+    },
+    "Contacts": {
+      "Phone": "89004231123",
+      "Mail": "metelkin.maks@mail.ru"
     }
   }
 ]

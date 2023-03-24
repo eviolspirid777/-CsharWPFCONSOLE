@@ -36,8 +36,8 @@ internal class Program
         if (sw == "y")
         {
             PrintTextYellow("Введите номер записи, которую хотите изменить:");
-            string? num = Console.ReadLine();
-            if (int.TryParse(num, out int number) && number <= persons.Count)
+            string? numberString = Console.ReadLine();
+            if (int.TryParse(numberString, out int number) && number <= persons.Count)
             {
                 number--;
                 PrintTextYellow("Что вы хотите изменить:\n1)ФИО\n2)Город\n3)Почтовый индекс\n4)Улицу\n5)Почту\n6)Телефон\n7)Факультет\n8)Курс\n9)Группу\n10)Специальность\n");
@@ -216,8 +216,8 @@ internal class Program
         {
             ExmpMenu(Persons);
             PrintTextYellow("\n\nВведите номер записи, которую вы хотите удалить");
-            string num = Console.ReadLine();
-            if(int.TryParse(num, out int number))
+            string numberString = Console.ReadLine();
+            if(int.TryParse(numberString, out int number))
             {
                 Console.Clear();
                 Persons.RemoveAll(x => Persons.IndexOf(x) == number - 1);

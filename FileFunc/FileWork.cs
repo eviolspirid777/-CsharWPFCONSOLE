@@ -11,18 +11,18 @@ namespace FileFunction
 {
     public class FileWork
     {
-        static string PathTo = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "content.json");
+        private static string pathTo = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, "content.json");
         static public StreamWriter CreateFile()
         {
-            StreamWriter sw = new StreamWriter(PathTo);
+            StreamWriter sw = new StreamWriter(pathTo);
             return sw;
         }
         static public bool ReadData(out List<Person> Persons)
         {
-            string flag = File.ReadAllText(PathTo).Trim();
+            string flag = File.ReadAllText(pathTo).Trim();
             if (flag != "")
                 {
-                    Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(PathTo));
+                    Persons = JsonSerializer.Deserialize<List<Person>>(File.ReadAllText(pathTo));
                     return true;
                 }
             else
@@ -34,7 +34,7 @@ namespace FileFunction
         static public void WriteData(List <Person> Persons)
         {
             string jsonString = JsonSerializer.Serialize(Persons, Options());
-            File.WriteAllText(PathTo, jsonString);
+            File.WriteAllText(pathTo, jsonString);
         }
         static JsonSerializerOptions Options()
         {

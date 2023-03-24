@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrsnLib
+namespace PersonLibrary
 {
     public class Contacts
     {

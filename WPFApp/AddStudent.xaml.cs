@@ -17,8 +17,8 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using PrsnLib;
-using FileFunction;
+using PersonLibrary;
+using FileFunctions;
 
 namespace csSharpJWPF
 {
@@ -31,7 +31,7 @@ namespace csSharpJWPF
             InitializeComponent();
         }
 
-        private void Key_Down(object sender, RoutedEventArgs e)
+        private void AddClick(object sender, RoutedEventArgs e)
         {
                 FileWork.ReadData(out List<Person> Persons);
                 person.Fio.Surname = Surname.Text;
@@ -52,7 +52,7 @@ namespace csSharpJWPF
                 window.Show();
                 this.Close();
         }
-        private void Exit_Key(object sender, EventArgs e)
+        private void ExitKey(object sender, EventArgs e)
         {
             this.Close();
         }

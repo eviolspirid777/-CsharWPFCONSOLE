@@ -10,74 +10,73 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using PrsnLib;
-using FileFunction;
-using CnslApp;
+using PersonLibrary;
+using FileFunctions;
+using ConsoleApp;
 
 namespace program;
 internal class Program
 {  
-    static void PrintTextYellow(string text)
+    static void WriteYellowLine(string text)
     {
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine(text);
         Console.ResetColor();
     }
-    static string EnterResult(string add)
+    static string SetPersonValues(string add)
     {
         Console.WriteLine($"Введите {add}:\n");
-        string text = Console.ReadLine();
-        return text;
+        return Console.ReadLine();
     }
     static void EditNode(List<Person> persons)
     {
-        PrintTextYellow("\nВы хотите изменить запись?(y/n)");
+        WriteYellowLine("\nВы хотите изменить запись?(y/n)");
         var sw = Console.ReadLine();
         if (sw == "y")
         {
-            PrintTextYellow("Введите номер записи, которую хотите изменить:");
+            WriteYellowLine("Введите номер записи, которую хотите изменить:");
             string? numberString = Console.ReadLine();
             if (int.TryParse(numberString, out int number) && number <= persons.Count)
             {
                 number--;
-                PrintTextYellow("Что вы хотите изменить:\n1)ФИО\n2)Город\n3)Почтовый индекс\n4)Улицу\n5)Почту\n6)Телефон\n7)Факультет\n8)Курс\n9)Группу\n10)Специальность\n");
+                WriteYellowLine("Что вы хотите изменить:\n1)ФИО\n2)Город\n3)Почтовый индекс\n4)Улицу\n5)Почту\n6)Телефон\n7)Факультет\n8)Курс\n9)Группу\n10)Специальность\n");
                 string t = Console.ReadLine();
                 switch (t)
                 {
                     case "1":
-                        persons[number].Fio.Surname = EnterResult("Фамилия");
-                        persons[number].Fio.Name = EnterResult("Имя");
-                        persons[number].Fio.Patron = EnterResult("Отчество");
+                        persons[number].Fio.Surname = SetPersonValues("Фамилия");
+                        persons[number].Fio.Name = SetPersonValues("Имя");
+                        persons[number].Fio.Patron = SetPersonValues("Отчество");
                         break;
                     case "2":
-                        persons[number].Address.City = EnterResult("Город");
+                        persons[number].Address.City = SetPersonValues("Город");
                         break;
                     case "3":
-                        persons[number].Address.PstIndex = EnterResult("Почтовый индекс");
+                        persons[number].Address.PstIndex = SetPersonValues("Почтовый индекс");
                         break;
                     case "4":
-                        persons[number].Address.Street = EnterResult("Улица");
+                        persons[number].Address.Street = SetPersonValues("Улица");
                         break;
                     case "5":
-                        persons[number].Contacts.Mail = EnterResult("Почта");
+                        persons[number].Contacts.Mail = SetPersonValues("Почта");
                         break;
                     case "6":
-                        persons[number].Contacts.Phone = EnterResult("Телефон");
+                        persons[number].Contacts.Phone = SetPersonValues("Телефон");
                         break;
                     case "7":
-                        persons[number].Curriculum.Faculty = EnterResult("Факультет");
+                        persons[number].Curriculum.Faculty = SetPersonValues("Факультет");
                         break;
                     case "8":
-                        persons[number].Curriculum.Course = EnterResult("Курс");
+                        persons[number].Curriculum.Course = SetPersonValues("Курс");
                         break;
                     case "9":
-                        persons[number].Curriculum.Group = EnterResult("Группа");
+                        persons[number].Curriculum.Group = SetPersonValues("Группа");
                         break;
                     case "10":
-                        persons[number].Curriculum.Specialty = EnterResult("Специальность");
+                        persons[number].Curriculum.Specialty = SetPersonValues("Специальность");
                         break;
                     default:
-                        PrintTextYellow("Введен неправильный символ!");
+                        WriteYellowLine("Введен неправильный символ!");
                         Console.ReadKey();
                         EditNode(persons);
                         break;
@@ -85,14 +84,14 @@ internal class Program
             }
             else
             {
-                PrintTextYellow("Вы вышли за пределы записей!");
+                WriteYellowLine("Вы вышли за пределы записей!");
                 Thread.Sleep(1200);
                 ListMenu();
             }
         }
         if (sw != "y" && sw != "n")
         {
-            PrintTextYellow("Вы ввели неправильный символ!");
+            WriteYellowLine("Вы ввели неправильный символ!");
             Thread.Sleep(1000);
             EditNode(persons);
         }
@@ -135,7 +134,7 @@ internal class Program
             Console.WriteLine("Файл пуст!");
         }
     }
-    static void ExmpMenu(List<Person> Persons)
+    static void PrintList(List<Person> Persons)
     {
         int counter = 1;
         Console.Clear();
@@ -149,25 +148,12 @@ internal class Program
         }
         Table.PrintLine();
     }
-    static void PrintPersonTable(List<Person> example)
-    {
-        int counter = 1;
-        Console.Clear();
-        Table.PrintLine();
-        Table.PrintRow("Номер", "Имя", "Фамилия", "Отчество", "Город", "Почтовый индекс", "Улица", "Почта", "Телефон", "Курс", "Факультет", "Группа", "Специальность");
-        Table.PrintLine();
-        foreach (var item in example)
-        {
-            Table.PrintRow($"{counter}", $"{item.Fio.Name}", $"{item.Fio.Surname}", $"{item.Fio.Patron}", $"{item.Address.City}", $"{item.Address.PstIndex}", $"{item.Address.Street}", $"{item.Contacts.Mail}", $"{item.Contacts.Phone}", $"{item.Curriculum.Course}", $"{item.Curriculum.Faculty}", $"{item.Curriculum.Group}", $"{item.Curriculum.Specialty}");
-            counter++;
-        }
-        Table.PrintLine();
-    }
+
     static void ListMenu()
     {
         if (FileWork.ReadData(out List<Person> Persons))
         {
-            ExmpMenu(Persons);
+            PrintList(Persons);
             Console.WriteLine();
             EditNode(Persons);
             FileWork.WriteData(Persons);
@@ -176,7 +162,7 @@ internal class Program
         }
         else
         {
-            PrintTextYellow("Не могу найти файл! Создаю новый...");
+            WriteYellowLine("Не могу найти файл! Создаю новый...");
             FileWork.CreateFile();
             Thread.Sleep(1000);
             ListMenu();
@@ -192,30 +178,30 @@ internal class Program
         }
         else
         {
-            PrintTextYellow("Не могу найти файл!");
+            WriteYellowLine("Не могу найти файл!");
         }
     }
-    static void Sort()
+    static void SortData()
     {
         if (FileWork.ReadData(out List<Person> person))
         {
             person.Sort((p1, p2) => p1.Fio.Name.CompareTo(p2.Fio.Name));
-            PrintPersonTable(person);
+            PrintList(person);
             Console.ReadKey();
             Console.Clear();
             PrintMenu();
         }
         else 
         {
-            PrintTextYellow("Не могу найти файл!");
+            WriteYellowLine("Не могу найти файл!");
         }
     }
     static void DeleteNode()
     {
         if (FileWork.ReadData(out List<Person> Persons))
         {
-            ExmpMenu(Persons);
-            PrintTextYellow("\n\nВведите номер записи, которую вы хотите удалить");
+            PrintList(Persons);
+            WriteYellowLine("\n\nВведите номер записи, которую вы хотите удалить");
             string numberString = Console.ReadLine();
             if(int.TryParse(numberString, out int number))
             {
@@ -226,24 +212,24 @@ internal class Program
             }
             else
             {
-                PrintTextYellow("Вы ввели не число!");
+                WriteYellowLine("Вы ввели не число!");
                 Console.Clear();
                 DeleteNode();
             }
         }
         else
         {
-            PrintTextYellow("Файл не существует!");
+            WriteYellowLine("Файл не существует!");
             FileWork.CreateFile();
             Thread.Sleep(1000);
             PrintMenu();
         }
     }
-    static void Filt()
+    static void FiltData()
     {
         if (FileWork.ReadData(out List<Person> Persons))
         {
-            PrintTextYellow("Введите ключевое слово:");
+            WriteYellowLine("Введите ключевое слово:");
             var keyword = Console.ReadLine();
             Console.Clear();
             var filteredList = Persons.Where(person =>
@@ -266,21 +252,21 @@ internal class Program
             }
             else
             {
-                PrintTextYellow("Не нашел записей..!");
+                WriteYellowLine("Не нашел записей..!");
             }
-            PrintTextYellow("\n\nНажмите любую клавишу...");
+            WriteYellowLine("\n\nНажмите любую клавишу...");
             Console.ReadKey();
             Console.Clear();
             PrintMenu();
         }
         else
         {
-            PrintTextYellow("Файл не найден!");
+            WriteYellowLine("Файл не найден!");
         }
     }
     static void PrintMenu()
     {
-        PrintTextYellow("Введите:\n1.Получить список (изменить запись)\n2.Добавить запись\n3.Удалить запись\n4.Сортировать\n5.Фильтровать\n6.Выйти\n");
+        WriteYellowLine("Введите:\n1.Получить список (изменить запись)\n2.Добавить запись\n3.Удалить запись\n4.Сортировать\n5.Фильтровать\n6.Выйти\n");
         var ch = Convert.ToChar(Console.ReadLine());
         Console.Clear();
         switch (ch)
@@ -302,17 +288,17 @@ internal class Program
                 }
             case '4':
                 {
-                    Sort();
+                    SortData();
                     break;
                 }
             case '5':
                 {
-                    Filt();
+                    FiltData();
                     break;
                 }
             case '6':
                 {
-                    PrintTextYellow("Удачи!");
+                    WriteYellowLine("Удачи!");
                     Thread.Sleep(1200);
                     Console.Clear();
                     System.Environment.Exit(0);
@@ -320,7 +306,7 @@ internal class Program
                 }
             default:
                 {
-                    PrintTextYellow("Ошибка! Не могу получить символ!");
+                    WriteYellowLine("Ошибка! Не могу получить символ!");
                     Thread.Sleep(500);
                     Console.Clear();
                     PrintMenu();

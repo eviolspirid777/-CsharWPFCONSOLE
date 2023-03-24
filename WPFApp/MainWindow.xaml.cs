@@ -17,8 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PrsnLib;
-using FileFunction;
+using PersonLibrary;
+using FileFunctions;
 using System.Globalization;
 
 namespace csSharpJWPF
@@ -29,44 +29,44 @@ namespace csSharpJWPF
         {
             InitializeComponent();
             FileWork.ReadData(out List<Person> Persons);
-            FillCount(Persons);
+            SetId(Persons);
             MyGrid.ItemsSource = Persons;
         }
-        public void Mouse_click(object e, RoutedEventArgs arg)
+        public void MouseClick(object e, RoutedEventArgs arg)
         {
             Window2 window = new Window2();
             window.Show();
             this.Close();
         }
-        public void Delete_click(object e, RoutedEventArgs arg)
+        public void DeleteClick(object e, RoutedEventArgs arg)
         {
             FileWork.ReadData(out List<Person> Persons);
-            FillCount(Persons);
+            SetId(Persons);
             if (int.TryParse(keyword.Text, out int num))
                 Persons.RemoveAll(x => Persons.IndexOf(x) == Convert.ToInt32(keyword.Text) - 1);
             else
                 MessageBox.Show("Ошибка! Введите номер записи!");
-            FillCount(Persons);
+            SetId(Persons);
             FileWork.WriteData(Persons);
             MyGrid.ItemsSource = Persons;
         }
-            public void Mouse_click_Filt(object e, RoutedEventArgs arg)
+            public void MouseClickFilt(object e, RoutedEventArgs arg)
         {
              FileWork.ReadData(out List<Person>Persons);
-            FillCount(Persons);
+            SetId(Persons);
             MyGrid.ItemsSource = Persons.Where(Persons => 
                Persons.Fio.Name.Contains(keyword.Text, StringComparison.CurrentCultureIgnoreCase)
             || Persons.Fio.Surname.Contains(keyword.Text, StringComparison.CurrentCultureIgnoreCase)
             || Persons.Fio.Patron.Contains(keyword.Text, StringComparison.CurrentCultureIgnoreCase)
             );
         }
-        private void Exit_Click(object sender, RoutedEventArgs e)
+        private void ExitClick(object sender, RoutedEventArgs e)
         {
             FileWork.ReadData(out List<Person> Persons);
-            FillCount(Persons);
+            SetId(Persons);
             MyGrid.ItemsSource = Persons;
         }
-        public void FillCount(List<Person> Persons)
+        public void SetId(List<Person> Persons)
         {
             int[] Capacity = new int[Persons.Count];
             for (int i = 0; i < Persons.Count; i++)

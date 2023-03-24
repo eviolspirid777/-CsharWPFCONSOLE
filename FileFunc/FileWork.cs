@@ -6,8 +6,9 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 using System.Threading.Tasks;
-using PrsnLib;
-namespace FileFunction
+using PersonLibrary;
+
+namespace FileFunctions
 {
     public class FileWork
     {

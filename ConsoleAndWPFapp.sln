@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CnslApp", "CnslApp\CnslApp.csproj", "{38BBAFE6-6AD6-450E-87EB-9D57FBA125BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "CnslApp\ConsoleApp.csproj", "{38BBAFE6-6AD6-450E-87EB-9D57FBA125BF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrsnLib", "PrsnLib\PrsnLib.csproj", "{DA9833C2-0F6C-420C-9B4A-6C05B5C0BF15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonLibrary", "PrsnLib\PersonLibrary.csproj", "{DA9833C2-0F6C-420C-9B4A-6C05B5C0BF15}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFApp", "WPFApp\WPFApp.csproj", "{BC2C06CB-4264-4EC6-A699-AE121AF669EA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileFunc", "FileFunc\FileFunc.csproj", "{5CA6791D-846F-436C-BC2D-6BB450F51E11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileFunctions", "FileFunc\FileFunctions.csproj", "{5CA6791D-846F-436C-BC2D-6BB450F51E11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

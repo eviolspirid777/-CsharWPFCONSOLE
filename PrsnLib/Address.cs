@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace PrsnLib
+namespace PersonLibrary
 {
     public class Address
     {

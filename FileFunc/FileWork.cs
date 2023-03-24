@@ -27,7 +27,7 @@ namespace FileFunction
                 }
             else
                 {
-                Persons = null;
+                    Persons = null;
                     return false;
                 }
         }
